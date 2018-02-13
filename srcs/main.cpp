@@ -12,5 +12,10 @@
 int	main(int argc, char **argv)
 {
 	Parser	*p = new Parser(argc, argv);
+
+	p->show_vector();
+	p->clean_tab();
+	p->show_vector();
+
 	return (0);
 }
