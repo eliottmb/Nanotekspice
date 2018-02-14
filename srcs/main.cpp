@@ -7,21 +7,15 @@
 
 #include <iostream>
 #include <fstream>
+#include "../include/Parser.hpp"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	std::ifstream	myReadFile;
- 	std::string	str;
+	Parser	*p = new Parser(argc, argv);
 
-	myReadFile.open("text.txt");
- 	if (myReadFile.is_open()) 
-	{
- 		while (!myReadFile.eof())
-		{
-	    		myReadFile >> str;
-    			std::cout << str << std::endl;
-		}
-	}
-	myReadFile.close();
+	p->show_vector();
+	p->clean_tab();
+	p->show_vector();
+
 	return (0);
 }
