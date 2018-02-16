@@ -7,6 +7,7 @@
 
 #include "AComponent.hpp"
 #include "IComponent.hpp"
+#include "Input.hpp"
 
 std::map<std::string, std::function<std::unique_ptr<nts::IComponent> *(const std::string &value)> > nts::AComponent::_funcs;
 
@@ -20,7 +21,7 @@ nts::AComponent::~AComponent() {}
 
 std::unique_ptr<nts::IComponent>        *nts::AComponent::createInput(const std::string &value) const
 {
-	std::cout << value << std::endl;
+	return (std::unique_ptr<nts::IComponent>*)new nts::Input(value);
 }
 
 std::unique_ptr<nts::IComponent>	*nts::AComponent::createOutput(const std::string &value) const

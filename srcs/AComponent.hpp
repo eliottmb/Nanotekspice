@@ -23,6 +23,7 @@ class	nts::AComponent : public nts::IComponent
 {
 	static std::map<std::string, std::function<std::unique_ptr<nts::IComponent> *(const std::string &value)> > _funcs;
 
+
 public:
 	AComponent();
 	virtual ~AComponent();
