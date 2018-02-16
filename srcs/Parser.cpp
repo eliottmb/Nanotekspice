@@ -31,12 +31,11 @@ Parser::Parser(int argc, char **argv)
 				_out.push_back(_str);
 		}
 	_file.close();
-	
 }
 
 Parser::~Parser()
 {
-
+	_file.close();
 }
 
 void	Parser::set_state()

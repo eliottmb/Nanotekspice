@@ -26,7 +26,7 @@ public:
 	~Parser();
 
 	void	set_state();
-	int	get_state();
+	int		get_state();
 	void	show_vector();
 	int	find_match();
 	void	clean_tab();
