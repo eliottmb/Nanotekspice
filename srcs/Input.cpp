@@ -5,7 +5,7 @@
 //
 //
 
-#include "Input.hpp"
+#include "../include/Input.hpp"
 
 nts::Input::Input(const std::string &name) : _name(name)
 {

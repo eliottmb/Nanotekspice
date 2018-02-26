@@ -5,9 +5,10 @@
 //
 //
 
-#include "AComponent.hpp"
-#include "IComponent.hpp"
-#include "Input.hpp"
+#include <functional>
+#include "../include/AComponent.hpp"
+#include "../include/IComponent.hpp"
+#include "../include/Input.hpp"
 
 std::map<std::string, std::function<std::unique_ptr<nts::IComponent> *(const std::string &value)> > nts::AComponent::_funcs;
 

@@ -5,9 +5,10 @@
 //
 //
 
+#include <functional>
 #include <iostream>
-#include "IComponent.hpp"
-#include "AComponent.hpp"
+#include "../include/IComponent.hpp"
+#include "../include/AComponent.hpp"
 
 int	main()
 {
