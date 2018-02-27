@@ -6,7 +6,7 @@
         {
             "label": "echo",
             "type": "shell",
-            "command": "make re",
+            "command": "make re;cp adder.nts basics;",
             "group": {
                 "kind": "build",
                 "isDefault": true

@@ -20,7 +20,9 @@ public:
     
     bool        check_for_empty_line();
     bool        check_for_tab();
+    bool	    check_for_useless_space();
     const char  *to_c_star(std::string str);
+    int		    my_find(std::string from, char c);
     bool        back_in();
 private:
     std::string     _path;

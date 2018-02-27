@@ -86,7 +86,7 @@ int	Parser::find_match()
 
 void	Parser::clean_tab()
 {
-	int	i = 0;
+	unsigned long	i = 0;
 
 	while (i < _in.size())
 	{

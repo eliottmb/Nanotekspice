@@ -10,12 +10,17 @@
 
 #include "IComponent.hpp"
 
+#include <vector>
+
 namespace nts {
 	class C4081;
 };
 
 class	C4081 : public nts::IComponent
 {
+	const int	nb_in;
+	const int	nb_out;
+	
 	std::string			_name;
 	std::vector<nts::Tristate>	_pins;
 

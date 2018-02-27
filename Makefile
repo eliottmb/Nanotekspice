@@ -13,7 +13,7 @@ CFLAGS	+= -W -Wall -Wextra # -Werror
 
 NAME		= nanotekspice
 
-SRCS		= srcs/main.cpp			\
+SRCS		= 	  srcs/main.cpp			\
 		  	  srcs/Parser.cpp		\
 			  srcs/ErrorManage.cpp
 
