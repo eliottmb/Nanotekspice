@@ -114,15 +114,15 @@ void	Parser::clean_tab()
 	}
 }
 
-std::vector<std::string>	Parser::get_Ins()
+std::vector<std::pair<std::string, std::string>	> Parser::get_comps()
 {
-	return _in;
+	return _comps;
 }
 
 void			Parser::get_pair_vector()
 {
 	unsigned long		i = 0;
-	
+
 	while (i < this->_in.size())
 	{
 		this->_comps.push_back(std::make_pair("input", this->_in[i]));
@@ -141,11 +141,11 @@ void			Parser::get_pair_vector()
 void			Parser::find_links()
 {
 	int		i = 0;
-	
+
 	this->_file.open(this->_err->_path.c_str());
     if (!this->_file.is_open())
 		exit(84);
-		
+
 	while (std::getline(this->_file, this->_str) && this->_str.find(".links") == std::string::npos)
 	;
 	while (std::getline(this->_file, this->_str))
@@ -160,15 +160,15 @@ void	Parser::fill_map()
 {
 	std::string		tmp;
 	unsigned long	pos = this->_str.find(":");
-	
+
 	std::string		name_comp = this->_str.substr(0, pos);
 	tmp = this->_str.substr(pos + 1, this->_str.size() - pos - 1);
-	
+
 	pos = this->_str.find(" ");
 	std::string		nb_pin = tmp.substr(0, pos);
 
 	std::cout << "name:" << name_comp << "      pin:" << nb_pin << std::endl;
-	
+
 	/*unsigned long	pos1 = this->_str.find(" ");
 	std::string		name_comp1 = this->_str.substr(pos1, pos1 + this->_err->_compo.size());
 	std::string		nb_pin1 = this->_str.substr(pos1 + this->_err->_compo.size() + 1, pos1 + this->_err->_compo.size() + 2);

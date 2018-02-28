@@ -24,7 +24,7 @@ class	Parser
 	std::vector<std::string>	_out;
 	std::vector<std::pair<std::string, std::string> > _comps;
 	std::map<std::pair<std::string, std::size_t>, std::pair<std::string, std::size_t> > _my_map;
-	
+
 public:
 	Parser(int argc, char **argv, ErrorManage *err);
 	~Parser();
@@ -34,14 +34,14 @@ public:
 	void				show_vector();
 	int				find_match();
 	void				clean_tab();
-	std::vector<std::string>	get_Ins();
+	std::vector<std::pair<std::string, std::string>	> get_comps();
 	void			get_pair_vector();
 	void			show_pair();
 	void			find_links();
 	void			fill_map();
 
 private:
-	
+
 };
 
 #endif /* __PARSER_HPP__ */

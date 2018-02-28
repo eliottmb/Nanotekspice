@@ -1,34 +1,29 @@
 //
 // EPITECH PROJECT, 2018
-// 4081
+// Input
 // File description:
 //
 //
 
-#ifndef	C4081_H_
-# define C4081_H_
+#ifndef INPUT_H_
+# define INPUT_H_
 
 # include "../../include/AComponent.hpp"
 # include "../../include/IComponent.hpp"
 # include "gate.hpp"
 
-# include <vector>
-
-namespace nts {
-	class C4081;
+namespace	nts {
+	class	Input;
 };
 
-class	nts::C4081 : public nts::IComponent
+class	nts::Input : public nts::IComponent
 {
-	const int	nb_in;
-	const int	nb_out;
-
-	std::string			_name;
-	std::vector<nts::Tristate>	_pins;
+	std::string	_name;
+	std::vector<nts::Tristate>	_pin;
 
 public:
-	C4081(const std::string &name);
-	virtual ~C4081() {};
+	Input(const std::string &name);
+	virtual ~Input() {};
 
 public:
 	virtual nts::Tristate	compute(std::size_t pin = 1);
@@ -38,4 +33,4 @@ public:
 	virtual void	setState(nts::Tristate);
 };
 
-#endif /* C4081_H_ */
+#endif /* INPUT_H_ */

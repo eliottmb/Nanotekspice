@@ -1,28 +1,29 @@
 //
 // EPITECH PROJECT, 2018
-// Input
+// Output
 // File description:
 //
 //
 
-#ifndef INPUT_H_
-# define INPUT_H_
+#ifndef OUTPUT_H_
+# define OUTPUT_H_
 
-# include "AComponent.hpp"
-# include "IComponent.hpp"
+# include "../../include/AComponent.hpp"
+# include "../../include/IComponent.hpp"
+# include "gate.hpp"
 
 namespace	nts {
-	class	Input;
+	class	Output;
 };
 
-class	nts::Input : public nts::IComponent
+class	nts::Output : public nts::IComponent
 {
 	std::string	_name;
 	std::vector<nts::Tristate>	_pin;
 
 public:
-	Input(const std::string &name);
-	virtual ~Input() {};
+	Output(const std::string &name);
+	virtual ~Output() {};
 
 public:
 	virtual nts::Tristate	compute(std::size_t pin = 1);
@@ -32,4 +33,4 @@ public:
 	virtual void	setState(nts::Tristate);
 };
 
-#endif /* INPUT_H_ */
+#endif /* OUTPUT_H_ */

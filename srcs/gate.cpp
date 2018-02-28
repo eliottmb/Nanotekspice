@@ -5,60 +5,36 @@
 // Makefile
 //
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "gate.hpp"
+#include "IComponent.hpp"
 
-bool    my_and(bool a, bool b)
+nts::Tristate    my_and(nts::Tristate a, nts::Tristate b)
 {
-    return (a && b);
+	if (a == 1 && b == 1)
+		return nts::TRUE;
+	return nts::FALSE;
 }
 
-bool    my_nand(bool a, bool b)
+nts::Tristate    my_nand(nts::Tristate a, nts::Tristate b)
 {
-    return (!(a && b));
+	return nts::TRUE;
+	//return (!(a && b));
 }
 
-bool    my_or(bool a, bool b)
+nts::Tristate    my_or(nts::Tristate a, nts::Tristate b)
 {
-    return (a || b);
+	return nts::TRUE;
+	//return (a || b);
 }
 
-bool    my_nor(bool a, bool b)
+nts::Tristate    my_nor(nts::Tristate a, nts::Tristate b)
 {
-    return (!(a || b));
+	return nts::TRUE;
+	//return (!(a || b));
 }
 
-bool    my_xor(bool a, bool b)
+nts::Tristate    my_xor(nts::Tristate a, nts::Tristate b)
 {
-    return (a != b && (a || b));
-}
-
-int main(int argc, char **argv)
-{
-    std::cout << "Je suis dans le main" << std::endl;
-    if (argc != 3)
-        return (-1);
-    std::cout << "Je suis apres le if" << std::endl;
-    bool a;
-    bool b;
-    std::cout << "Je suis ici" << std::endl;
-    if (atoi(argv[1]) == 1)
-        a = true;
-    else if (atoi(argv[1]) == 0)
-        a = false;
-    std::cout << "Je suis la" << std::endl;
-    if (atoi(argv[2]) == 1)
-        b = true;
-    else if (atoi(argv[2]) == 0)
-        b = false;
-    std::cout << "Je suis a epitech" << std::endl;
-        bool ret = my_xor(a, b);
-        if (ret == true)
-            std::cout << "TRUE" << std::endl;
-        else
-            std::cout << "FALSE" << std::endl;
-
-            return (0);
+	return nts::TRUE;
+	//return (a != b && (a || b));
 }

@@ -7,7 +7,20 @@
 
 #include <map>
 #include <iostream>
-#include "prompt.hpp"
+#include <csignal>
+#include "../include/prompt.hpp"
+
+int	g_sig = 0;
+int	g_isLoop = 0;
+
+void	sighandler(int s)
+{
+	std::cout << std::endl;
+	if (g_isLoop == 1)
+		g_sig = 1;
+	else
+		exit(0);
+}
 
 int	simulate(Parser *parse)
 {
@@ -16,7 +29,12 @@ int	simulate(Parser *parse)
 
 int	loop(Parser *parse)
 {
-	std::cout << "loop\n";
+	g_isLoop = 1;
+	std::signal(SIGINT, sighandler);
+	while (1)
+		if (g_sig != 0)
+			break;
+	return 0;
 }
 
 int	display(Parser *parse)
@@ -39,13 +57,16 @@ int	init_Pins(Parser *parse)
 	int				i = 0;
 	std::string			elem;
 	nts::AComponent			*comp;
-	std::vector<std::string>	ins;
+	std::vector<std::pair<std::string, std::string> >	ins;
 
 	comp = new nts::AComponent();
-	parse->clean_tab();
-	ins = parse->get_Ins();
+//	parse->clean_tab();
+	ins = parse->get_comps();
 	while (i < ins.size())
-		_ins.push_back(comp->createComponent("input", ins[i++]));
+	{
+		std::cout << ins[i].first << " :::: " << ins[i++].second << std::endl;
+//		_ins.push_back(comp->createComponent(ins[i].first, ins[i++].second));
+	}
 }
 
 int	setInput(std::string str)
@@ -53,13 +74,16 @@ int	setInput(std::string str)
 	int		intState;
 	std::string	name;
 	nts::Tristate	state;
+	int		i = 0;
 
 	name = str.substr(0, str.find("="));
+	while (i < _ins.size() && (*(_ins[i]))->getName() != name)
+		i++;
 	intState = std::stoi(str.substr(str.find("=") + 1, str.size()));
 	if (intState == 1)
-		(*(_ins[0]))->setState((nts::Tristate)1);
+		(*(_ins[i]))->setState((nts::Tristate)1);
 	else
-		(*(_ins[0]))->setState((nts::Tristate)0);
+		(*(_ins[i]))->setState((nts::Tristate)0);
 	return (0);
 }
 
@@ -85,10 +109,13 @@ int	parse_entry(std::string str, Parser *parse)
 int	main(int ac, char **av)
 {
 	std::string	entry;
-	Parser		*parse = new Parser(ac, av);
+	Parser		*parse;
+	ErrorManage	*e = new ErrorManage(av[1]);
 
+	parse = new Parser(ac, av, e);
 	init_Pins(parse);
 	do {
+		g_isLoop = 2;
 		std::cout << ">";
 		std::cin >> entry;
 	} while (parse_entry(entry, parse) != 1);
