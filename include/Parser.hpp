@@ -19,18 +19,17 @@ class	Parser
 	std::string	_str;
 	std::vector<std::string>	_in;
 	std::vector<std::string>	_out;
-	
+
 public:
-	
 	Parser(int argc, char **argv);
 	~Parser();
 
-	void	set_state();
-	int		get_state();
-	void	show_vector();
-	int		find_match();
-	void	clean_tab();
-	
+	void				set_state();
+	int				get_state();
+	void				show_vector();
+	int				find_match();
+	void				clean_tab();
+	std::vector<std::string>	get_Ins();
 
 private:
 	bool	error_manage(int argc, char **argv);

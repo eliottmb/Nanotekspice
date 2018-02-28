@@ -19,7 +19,7 @@ Parser::Parser(int argc, char **argv)
 	this->_state = 0;
 	this->_file.open(argv[1]);
 
-	if (!this->_file.is_open()) 
+	if (!this->_file.is_open())
 		exit(84);
 	while (std::getline(this->_file, this->_str))
 		{
@@ -70,7 +70,7 @@ void	Parser::show_vector()
 		{
 			std::cout << this->_out[i] << std::endl;
 			i = i + 1;
-		}	
+		}
 }
 
 int	Parser::find_match()
@@ -106,4 +106,9 @@ bool	Parser::error_manage(int argc, char **argv)
 	if (argc != 2)
 		return (false);
 	return (true);
+}
+
+std::vector<std::string>	Parser::get_Ins()
+{
+	return _in;
 }
