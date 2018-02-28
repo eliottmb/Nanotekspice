@@ -21,11 +21,15 @@ int	main(int argc, char **argv)
 	e->check_for_tab();
 	e->check_for_useless_space();
 	e->check_for_name();
-	//Parser	*p = new Parser(argc, argv);
+	
+	Parser	*p = new Parser(argc, argv, e);
 
-	//p->show_vector();
-	//p->clean_tab();
-	//p->show_vector();
+	p->show_vector();
+		
+	std::cout << "\n\nOn va afficher le vecteur de pair:" << std::endl;
+	p->show_pair();
+	std::cout << "--------------------------------------------" << std::endl;
+	p->fill_map();
 	
 	return (0);
 }

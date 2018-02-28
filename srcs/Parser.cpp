@@ -11,12 +11,12 @@
 #include <fstream>
 #include <vector>
 #include "../include/Parser.hpp"
+#include "../include/ErrorManage.hpp"
 
-Parser::Parser(int argc, char **argv)
+Parser::Parser(int argc, char **argv, ErrorManage *err)
 {
-	if (!this->error_manage(argc, argv))
-		exit (84);
 	this->_state = 0;
+	this->_err = err;
 	this->_file.open(argv[1]);
 
 	if (!this->_file.is_open())
@@ -31,6 +31,8 @@ Parser::Parser(int argc, char **argv)
 				_out.push_back(_str);
 		}
 	_file.close();
+	this->clean_tab();
+	this->get_pair_vector();
 }
 
 Parser::~Parser()
@@ -73,6 +75,17 @@ void	Parser::show_vector()
 		}
 }
 
+void	Parser::show_pair()
+{
+	unsigned long	i = 0;
+
+	while (i < _comps.size())
+		{
+			std::cout << this->_comps[i].first << ": " << this->_comps[i].second << std::endl;
+			i = i + 1;
+		}
+}
+
 int	Parser::find_match()
 {
 	if (_str.find(".chipsets") != std::string::npos)
@@ -101,14 +114,47 @@ void	Parser::clean_tab()
 	}
 }
 
-bool	Parser::error_manage(int argc, char **argv)
-{
-	if (argc != 2)
-		return (false);
-	return (true);
-}
-
 std::vector<std::string>	Parser::get_Ins()
 {
 	return _in;
+}
+
+void			Parser::get_pair_vector()
+{
+	unsigned long		i = 0;
+	
+	while (i < this->_in.size())
+	{
+		this->_comps.push_back(std::make_pair("input", this->_in[i]));
+		i = i + 1;
+	}
+	i = 0;
+	while (i < this->_out.size())
+	{
+		this->_comps.push_back(std::make_pair("output", this->_out[i]));
+		i = i + 1;
+	}
+	this->_comps.push_back(std::make_pair(this->_err->_compo, this->_err->_name));
+}
+
+
+void			Parser::fill_map()
+{
+	int		i = 0;
+
+	
+	while (std::getline(this->_file, this->_str) && this->_str.find(".links") != std::string::npos)
+	{	
+	}
+	while (i <= 3)
+	{
+		std::getline(this->_file, this->_str);
+		std::cout << this->_str << std::endl;
+	}	
+	/*
+	
+	
+	
+	while(i < )
+	this->_my_map.insert(make_pair(this->_err->_compo, ), make_pair());*/
 }

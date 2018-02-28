@@ -130,6 +130,7 @@ bool		ErrorManage::check_for_name()
 				if (this->_str.c_str()[4] != ' ' || j != 0)
 					return (false);
 				this->_name = this->_str.substr(5);
+				this->_compo = std::string(this->_my_components[i]);
 				if (this->_name.find(' ') != std::string::npos)
 					return (false);
 				std::cout << "Component: " << this->_my_components[i] << " Name : " << this->_name<< std::endl;
@@ -185,3 +186,5 @@ bool		ErrorManage::back_in()
 
 // check nombre de pin relie a chaque fois 
 // check si le nombre de pin est bon
+// check names for links
+// 
