@@ -18,6 +18,7 @@ ErrorManage::ErrorManage(std::string path)
     if (!this->_file.is_open() || !this->_douille.is_open()) 
 		exit(84);
 	this->init_component_tab();
+	this->check_for_empty_line();
 }
 
 ErrorManage::~ErrorManage()
@@ -76,6 +77,7 @@ bool    ErrorManage::check_for_empty_line()
                 	this->_douille << this->_str << std::endl;
 		}
 		this->back_in();
+		this->check_for_tab();
 		return (true);
 }
 
@@ -94,6 +96,7 @@ bool    ErrorManage::check_for_tab()
 		this->_douille << this->_str << std::endl;
 	}
 	this->back_in();
+	this->check_for_useless_space();
 	return (true);
 }
 
@@ -114,6 +117,7 @@ bool	ErrorManage::check_for_useless_space()
 		this->_douille << this->_str << std::endl;
 	}
 	this->back_in();
+	this->check_for_name();
 	return (true);
 }
 
@@ -133,7 +137,6 @@ bool		ErrorManage::check_for_name()
 				this->_compo = std::string(this->_my_components[i]);
 				if (this->_name.find(' ') != std::string::npos)
 					return (false);
-				std::cout << "Component: " << this->_my_components[i] << " Name : " << this->_name<< std::endl;
 				j = j + 1;
 			}
 			if (j > 1)

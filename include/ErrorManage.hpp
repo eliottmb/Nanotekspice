@@ -31,9 +31,9 @@ public:
 
 	std::string				_compo;
 	std::string				_name;
+	std::string				_path;
 	
 private:
-	std::string				_path;
 	std::ifstream			_file;
 	std::string				_str;
 	std::ofstream			_douille;

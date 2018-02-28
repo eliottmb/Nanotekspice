@@ -17,19 +17,10 @@ int	main(int argc, char **argv)
 	
 	ErrorManage	*e = new ErrorManage(argv[1]);
 
-	e->check_for_empty_line();
-	e->check_for_tab();
-	e->check_for_useless_space();
-	e->check_for_name();
 	
 	Parser	*p = new Parser(argc, argv, e);
 
-	p->show_vector();
-		
-	std::cout << "\n\nOn va afficher le vecteur de pair:" << std::endl;
-	p->show_pair();
-	std::cout << "--------------------------------------------" << std::endl;
-	p->fill_map();
+	p->find_links();
 	
 	return (0);
 }

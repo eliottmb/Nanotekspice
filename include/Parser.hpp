@@ -37,6 +37,7 @@ public:
 	std::vector<std::string>	get_Ins();
 	void			get_pair_vector();
 	void			show_pair();
+	void			find_links();
 	void			fill_map();
 
 private:
