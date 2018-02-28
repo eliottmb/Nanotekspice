@@ -20,12 +20,12 @@ int	main(int argc, char **argv)
 	e->check_for_empty_line();
 	e->check_for_tab();
 	e->check_for_useless_space();
-	
-	Parser	*p = new Parser(argc, argv);
+	e->check_for_name();
+	//Parser	*p = new Parser(argc, argv);
 
-	p->show_vector();
-	p->clean_tab();
-	p->show_vector();
+	//p->show_vector();
+	//p->clean_tab();
+	//p->show_vector();
 	
 	return (0);
 }

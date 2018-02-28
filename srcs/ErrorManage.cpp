@@ -17,11 +17,41 @@ ErrorManage::ErrorManage(std::string path)
     this->_douille.open(to_c_star("de_batard.txt"));
     if (!this->_file.is_open() || !this->_douille.is_open()) 
 		exit(84);
+	this->init_component_tab();
 }
 
 ErrorManage::~ErrorManage()
 {
 
+}
+
+void	ErrorManage::init_component_tab()
+{
+	this->_my_components.push_back("4001");
+	this->_my_components.push_back("4008");
+	this->_my_components.push_back("4011");
+	this->_my_components.push_back("4013");
+	this->_my_components.push_back("4017");
+	this->_my_components.push_back("4030");
+	this->_my_components.push_back("4069");
+	this->_my_components.push_back("4071");
+	this->_my_components.push_back("4094");
+	this->_my_components.push_back("4514");
+}
+
+int		ErrorManage::find_in_component_tab()
+{
+	int	i = 0;
+	int	tmp;
+
+	while (i < 10)
+	{
+		tmp = this->_str.compare(0, 4, this->_my_components[i]);
+		if (tmp == 0)
+			return (i);
+		i = i + 1;
+	}
+	return (-1);
 }
 
 int		ErrorManage::my_find(std::string from, char c)
@@ -87,6 +117,30 @@ bool	ErrorManage::check_for_useless_space()
 	return (true);
 }
 
+bool		ErrorManage::check_for_name()
+{
+	int		i;
+	int		j = 0;
+
+	while (std::getline(this->_file, this->_str))
+	{	
+		i = this->find_in_component_tab();
+		if (i != -1)
+			{
+				if (this->_str.c_str()[4] != ' ' || j != 0)
+					return (false);
+				this->_name = this->_str.substr(5);
+				if (this->_name.find(' ') != std::string::npos)
+					return (false);
+				std::cout << "Component: " << this->_my_components[i] << " Name : " << this->_name<< std::endl;
+				j = j + 1;
+			}
+			if (j > 1)
+				return (false);
+	}
+	return (true);
+}
+
 const char *ErrorManage::to_c_star(std::string str)
 {
 	char * writable = new char[str.size() + 1];
@@ -125,10 +179,9 @@ bool		ErrorManage::back_in()
 //	// check ligne vide->delete line
 // check tab = space
 // check multispace = space
-
 // check there is a name 
 // check only one name
-// check nombre de pin relie a chaque fois 
 // check si c'est bien un composant du sujet
+
+// check nombre de pin relie a chaque fois 
 // check si le nombre de pin est bon
-//
