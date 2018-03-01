@@ -159,19 +159,23 @@ void			Parser::find_links()
 void	Parser::fill_map()
 {
 	std::string		tmp;
+	std::string		name_comp1;
 	unsigned long	pos = this->_str.find(":");
 
 	std::string		name_comp = this->_str.substr(0, pos);
 	tmp = this->_str.substr(pos + 1, this->_str.size() - pos - 1);
 
-	pos = this->_str.find(" ");
+	pos = tmp.find(" ");
 	std::string		nb_pin = tmp.substr(0, pos);
+	tmp = tmp.substr(pos + 1, tmp.size() - pos - 1);
+	pos = tmp.find(":");
 
+	name_comp1 = tmp.substr(0, pos);
+	tmp = tmp.substr(pos + 1, tmp.size() - pos - 1);
+	
 	std::cout << "name:" << name_comp << "      pin:" << nb_pin << std::endl;
-
-	/*unsigned long	pos1 = this->_str.find(" ");
-	std::string		name_comp1 = this->_str.substr(pos1, pos1 + this->_err->_compo.size());
-	std::string		nb_pin1 = this->_str.substr(pos1 + this->_err->_compo.size() + 1, pos1 + this->_err->_compo.size() + 2);
-
-	*/
+	std::cout << "name:" << name_comp1 << "      pin:" << tmp << std::endl;
+	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
+	
+	this->_my_map.insert(make_pair(name_comp, nb_pin), make_pair(name_comp1, tmp));
 }
