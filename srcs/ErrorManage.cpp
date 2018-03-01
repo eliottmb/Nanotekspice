@@ -12,76 +12,56 @@
 
 ErrorManage::ErrorManage(std::string path)
 {
+	this->_my_comps = Components();
 	this->_path = path;
-    this->_file.open(to_c_star(this->_path));
-    this->_douille.open(to_c_star("de_batard.txt"));
-    if (!this->_file.is_open() || !this->_douille.is_open()) 
+	this->_file.open(this->_path.c_str());
+	this->_douille.open(std::string("tmp_file.txt").c_str());
+	if (!this->_file.is_open() || !this->_douille.is_open()) 
 		exit(84);
-	this->init_component_tab();
-	this->check_for_empty_line();
+	this->do_all_checks();
 }
 
 ErrorManage::~ErrorManage()
 {
-
+	this->_file.close();
+	this->_douille.close();
 }
 
-void	ErrorManage::init_component_tab()
+bool	ErrorManage::do_all_checks()
 {
-	this->_my_components.push_back("4001");
-	this->_my_components.push_back("4008");
-	this->_my_components.push_back("4011");
-	this->_my_components.push_back("4013");
-	this->_my_components.push_back("4017");
-	this->_my_components.push_back("4030");
-	this->_my_components.push_back("4069");
-	this->_my_components.push_back("4071");
-	this->_my_components.push_back("4094");
-	this->_my_components.push_back("4514");
+	this->check_for_coms();
+	this->check_for_empty_line();
+	this->check_for_tabs();
+	this->check_for_useless_space();
+	if (this->check_for_names() == false/* || check_for_struct() == false*/)
+		return (false);
+	return (true);
 }
 
-int		ErrorManage::find_in_component_tab()
+void	ErrorManage::check_for_coms()
 {
-	int	i = 0;
-	int	tmp;
+	unsigned long	found;
 
-	while (i < 10)
-	{
-		tmp = this->_str.compare(0, 4, this->_my_components[i]);
-		if (tmp == 0)
-			return (i);
-		i = i + 1;
+	while (std::getline(this->_file, this->_str))
+	{	
+		found = this->_str.find("#");
+			if (found == std::string::npos)
+				this->_douille << this->_str << std::endl;
 	}
-	return (-1);
+	this->back_in();
 }
 
-int		ErrorManage::my_find(std::string from, char c)
-{
-	const char	*str = from.c_str();
-	int			i = 0;
-
-	while (str[i])
-		{
-			if (str[i] == c)
-				return (i);
-			i = i + 1;
-		}
-	return (-1);
-}
-
-bool    ErrorManage::check_for_empty_line()
+void    ErrorManage::check_for_empty_line()
 {
 	while (std::getline(this->_file, this->_str))
 		{
 			if (this->_str != "")
                 	this->_douille << this->_str << std::endl;
 		}
-		this->back_in();
-		this->check_for_tab();
-		return (true);
+	this->back_in();
 }
 
-bool    ErrorManage::check_for_tab()
+void    ErrorManage::check_for_tabs()
 {
 	int		found;
 	
@@ -89,18 +69,16 @@ bool    ErrorManage::check_for_tab()
 	{	
 		do
 		{
-			found = this->my_find(this->_str, 9);
+			found = this->_str.find('\t');
 			if (found != -1)
 				this->_str.replace(found, 1, " ");
 			} while (found != -1);
 		this->_douille << this->_str << std::endl;
 	}
 	this->back_in();
-	this->check_for_useless_space();
-	return (true);
 }
 
-bool	ErrorManage::check_for_useless_space()
+void	ErrorManage::check_for_useless_space()
 {
 	unsigned long		found;
 
@@ -114,28 +92,27 @@ bool	ErrorManage::check_for_useless_space()
 			if (found != std::string::npos)
 				this->_str.replace(found, 2, " ");
 			} while (found != std::string::npos);
+		if (this->_str.c_str()[this->_str.size() - 1] == ' ')
+			this->_str = this->_str.substr(0, this->_str.size() - 1);
 		this->_douille << this->_str << std::endl;
 	}
 	this->back_in();
-	this->check_for_name();
-	return (true);
+	std::remove(std::string("tmp_file.txt").c_str());
 }
 
-bool		ErrorManage::check_for_name()
+bool		ErrorManage::check_for_names()
 {
 	int		i;
 	int		j = 0;
 
 	while (std::getline(this->_file, this->_str))
 	{	
-		i = this->find_in_component_tab();
+		i = this->_my_comps.find_in_component_tab(this->_str);
 		if (i != -1)
 			{
 				if (this->_str.c_str()[4] != ' ' || j != 0)
 					return (false);
-				this->_name = this->_str.substr(5);
-				this->_compo = std::string(this->_my_components[i]);
-				if (this->_name.find(' ') != std::string::npos)
+				if (this->_str.find(' ') != std::string::npos)
 					return (false);
 				j = j + 1;
 			}
@@ -145,38 +122,46 @@ bool		ErrorManage::check_for_name()
 	return (true);
 }
 
-const char *ErrorManage::to_c_star(std::string str)
+/*bool		ErrorManage::check_for_struct()
 {
-	char * writable = new char[str.size() + 1];
-	
-	std::copy(str.begin(), str.end(), writable);
-	writable[str.size()] = '\0';
-	return (writable);
-}
+	while (std::getline(this->_file, this->_str))
+		{
+			if (this->_str.find(".chipsets:") == std::string::npos)
+				&& this->_str.size() == 10
+				
+				&& this->_str.find("input ") == std::string::npos
+				&& this->_str.find("output ") == std::string::npos
+				&& this->_str.find(".links") == std::string::npos
+				this->_str.find("") == std::string::npos
+		}
+	this->back_in();
+	this->check_for_tab();
+	return (true);
+}*/
 
 bool		ErrorManage::back_in()
 {
-		int	i;
+	int	i;
 
-		this->_file.close();
-		this->_douille.close();
-		if (std::remove(this->_path.c_str()) != 0)
-		{
-			std::cout << "ERROR 0" << std::endl;
-			return (false);
-		}
-		i = std::rename(to_c_star("de_batard.txt"), this->_path.c_str());
-		if (i != 0)
-		{
-			std::cout << "ERROR 1" << i <<std::endl;	
-			std::perror("rename");
-			return (false);
-		}
-		this->_file.open(to_c_star(this->_path));
-    	this->_douille.open(to_c_star("de_batard.txt"));
+	this->_file.close();
+	this->_douille.close();
+	if (std::remove(this->_path.c_str()) != 0)
+	{
+		std::cout << "ERROR 0" << std::endl;
+		return (false);
+	}
+	i = std::rename(std::string("tmp_file.txt").c_str(), this->_path.c_str());
+	if (i != 0)
+	{
+		std::cout << "ERROR 1" << i <<std::endl;	
+		std::perror("rename");
+		return (false);
+	}
+	this->_file.open(this->_path.c_str());
+    	this->_douille.open(std::string("tmp_file.txt").c_str());
     	if (!this->_file.is_open() || !this->_douille.is_open()) 
-			exit(84);
-		return (true);
+		exit(84);
+	return (true);
 }
 
 // check file 

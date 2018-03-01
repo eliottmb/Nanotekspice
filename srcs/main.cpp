@@ -18,9 +18,10 @@ int	main(int argc, char **argv)
 	ErrorManage	*e = new ErrorManage(argv[1]);
 
 	
-	Parser	*p = new Parser(argc, argv, e);
+	Parser	*p = new Parser(argc, argv);
 
-	p->find_links();
+	//p->find_links();
+	//p->show_killing_death_vector();
 	
 	return (0);
 }

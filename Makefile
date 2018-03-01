@@ -5,17 +5,19 @@
 ## Makefile
 ##
 
-CC	= clang++ -I./include/
+CXX	= clang++ -I./include/
 
 RM	= rm -f
 
-CFLAGS	+= -W -Wall -Wextra # -Werror
+CXXLAGS	+= -W -Wall -Wextra -Werror
 
 NAME		= nanotekspice
 
 SRCS		= 	  srcs/main.cpp			\
-		  	  srcs/Parser.cpp		\
-			  srcs/ErrorManage.cpp
+		  	  	  srcs/Parser.cpp		\
+			  	  srcs/ErrorManage.cpp	\
+				  srcs/Link.cpp			\
+				  srcs/Components.cpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
@@ -29,7 +31,7 @@ UNSET           =       \033[0m
 all: $(NAME)
 
 $(NAME):	$(OBJS)
-		@$(CC) -o $(NAME) $(SRCS) $(CFLAGS)
+		@$(CXX) -o $(NAME) $(SRCS) $(CXXFLAGS)
 
 clean:
 	$(RM) $(OBJS)
@@ -39,8 +41,9 @@ fclean:	clean
 
 re: fclean all
 
-.c.o:
-	@$(CC) -c $< -o $@
-	@printf "$(GREEN)[compiled] $(BLUE)$@\n$(UNSET)"
+.cpp.o:
+	@$(CXX) -c $< -o $(CXXFLAGS) $@
+	@printf "$(GREEN)[compiled] $(CYAN) -I./include/ $(BLUE) \
+	-W -Wall -Wextra -Werror $(PURPLE)$@\n$(UNSET)"
 
 .PHONY: all clean fclean re

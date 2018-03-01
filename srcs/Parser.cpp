@@ -11,14 +11,14 @@
 #include <fstream>
 #include <vector>
 #include "../include/Parser.hpp"
+#include "../include/Link.hpp"
 #include "../include/ErrorManage.hpp"
 
-Parser::Parser(int argc, char **argv, ErrorManage *err)
+Parser::Parser(int argc, char **argv)
 {
 	this->_state = 0;
-	this->_err = err;
+	this->_my_comps = Components();
 	this->_file.open(argv[1]);
-
 	if (!this->_file.is_open())
 		exit(84);
 	while (std::getline(this->_file, this->_str))
@@ -32,7 +32,7 @@ Parser::Parser(int argc, char **argv, ErrorManage *err)
 		}
 	_file.close();
 	this->clean_tab();
-	this->get_pair_vector();
+	this->make_pair_vector();
 }
 
 Parser::~Parser()
@@ -119,7 +119,7 @@ std::vector<std::pair<std::string, std::string>	> Parser::get_comps()
 	return _comps;
 }
 
-void			Parser::get_pair_vector()
+void			Parser::make_pair_vector()
 {
 	unsigned long		i = 0;
 
@@ -134,7 +134,7 @@ void			Parser::get_pair_vector()
 		this->_comps.push_back(std::make_pair("output", this->_out[i]));
 		i = i + 1;
 	}
-	this->_comps.push_back(std::make_pair(this->_err->_compo, this->_err->_name));
+	this->_comps.push_back(std::make_pair(this->_type, this->_name));
 }
 
 
@@ -142,7 +142,7 @@ void			Parser::find_links()
 {
 	int		i = 0;
 
-	this->_file.open(this->_err->_path.c_str());
+	this->_file.open(this->_path.c_str());
     if (!this->_file.is_open())
 		exit(84);
 
@@ -150,7 +150,6 @@ void			Parser::find_links()
 	;
 	while (std::getline(this->_file, this->_str))
 	{
-		//std::cout << this->_str << std::endl;
 		this->fill_map();
 		i = i + 1;
 	}
@@ -161,21 +160,28 @@ void	Parser::fill_map()
 	std::string		tmp;
 	std::string		name_comp1;
 	unsigned long	pos = this->_str.find(":");
-
 	std::string		name_comp = this->_str.substr(0, pos);
-	tmp = this->_str.substr(pos + 1, this->_str.size() - pos - 1);
+	std::string		nb_pin;
+	Link			l;
 
+	tmp = this->_str.substr(pos + 1, this->_str.size() - pos - 1);
 	pos = tmp.find(" ");
-	std::string		nb_pin = tmp.substr(0, pos);
+	nb_pin = tmp.substr(0, pos);
 	tmp = tmp.substr(pos + 1, tmp.size() - pos - 1);
 	pos = tmp.find(":");
-
 	name_comp1 = tmp.substr(0, pos);
 	tmp = tmp.substr(pos + 1, tmp.size() - pos - 1);
-	
-	std::cout << "name:" << name_comp << "      pin:" << nb_pin << std::endl;
-	std::cout << "name:" << name_comp1 << "      pin:" << tmp << std::endl;
-	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
-	
-	this->_my_map.insert(make_pair(name_comp, nb_pin), make_pair(name_comp1, tmp));
+	l = Link(name_comp, nb_pin, name_comp1, tmp);
+	this->_my_links.push_back(l);
+}
+
+void	Parser::show_killing_death_vector()
+{
+	unsigned long	i = 0;
+
+	while (i < this->_my_links.size())
+	{
+		std::cout << "Lien " << i << " : " << this->_my_links[i]._comp << "->" << this->_my_links[i]._pin << "\t\t#--------#\t" << this->_my_links[i]._comp1 << "->" << this->_my_links[i]._pin1 << std::endl;
+		i = i + 1;
+	}
 }

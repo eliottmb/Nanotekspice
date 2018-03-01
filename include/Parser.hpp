@@ -13,20 +13,24 @@
 #include <string>
 #include <map>
 #include "ErrorManage.hpp"
+#include "Link.hpp"
 
 class	Parser
 {
 	int		_state;
+	std::string	_name;
+	std::string _path;
+	std::string _type;
 	std::ifstream	_file;
 	std::string	_str;
-	ErrorManage					*_err;
+	Components			_my_comps;
 	std::vector<std::string>	_in;
 	std::vector<std::string>	_out;
 	std::vector<std::pair<std::string, std::string> > _comps;
-	std::map<std::pair<std::string, std::size_t>, std::pair<std::string, std::size_t> > _my_map;
+	std::vector<Link> _my_links;
 
 public:
-	Parser(int argc, char **argv, ErrorManage *err);
+	Parser(int argc, char **argv);
 	~Parser();
 
 	void				set_state();
@@ -35,10 +39,11 @@ public:
 	int				find_match();
 	void				clean_tab();
 	std::vector<std::pair<std::string, std::string>	> get_comps();
-	void			get_pair_vector();
+	void			make_pair_vector();
 	void			show_pair();
 	void			find_links();
 	void			fill_map();
+	void			show_killing_death_vector();
 
 private:
 

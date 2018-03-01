@@ -12,6 +12,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "Components.hpp"
 
 class	ErrorManage
 {
@@ -19,25 +20,22 @@ public:
 	ErrorManage(std::string path);
 	~ErrorManage();
 	
-	void		init_component_tab();
-	int			find_in_component_tab();
-	bool		check_for_empty_line();
-	bool		check_for_tab();
-	bool		check_for_useless_space();
-	bool		check_for_name();
-	const char	*to_c_star(std::string str);
-	int			my_find(std::string from, char c);
+	bool		do_all_checks();
+	void		check_for_coms();
+	void		check_for_empty_line();
+	void		check_for_tabs();
+	void		check_for_useless_space();
+	bool		check_for_names();
+	//bool		check_for_struct();
 	bool		back_in();
 
-	std::string				_compo;
-	std::string				_name;
-	std::string				_path;
+	Components	_my_comps;
+	std::string	_path;
 	
 private:
-	std::ifstream			_file;
-	std::string				_str;
-	std::ofstream			_douille;
-	std::vector<std::string>	_my_components;
+	std::ifstream	_file;
+	std::string	_str;
+	std::ofstream	_douille;
 	};
 
 #endif /* __ERRORMANAGE_HPP__ */
