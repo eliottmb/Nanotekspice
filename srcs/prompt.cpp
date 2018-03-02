@@ -78,7 +78,8 @@ int	Prompt::init_Pins(Parser *parse)
 
 	comp = new nts::AComponent();
 	comps = parse->get_comps();
-	std::cout << "test\n";
+	//std::cout << "test\n";
+	parse->show_pair();
 	while (i < comps.size()) {
 		_ins.push_back(comp->createComponent(comps[i].first, comps[i].second));
 		i++;

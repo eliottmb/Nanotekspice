@@ -23,11 +23,11 @@ Parser::Parser(std::string path) : _path(path)
 		exit(84);
 	while (std::getline(this->_file, this->_str))
 		{
-			if (find_match() == 0)
-			  	this->set_state();
-			if (this->get_state() == 1 && find_match() == 1)
+			/*if (find_match() == 0)
+			  	this->set_state();*/
+			if (/*this->get_state() == 1 && */find_match() == 1)
 				_in.push_back(_str);
-			else if (this->get_state() == 1 && find_match() == 2)
+			else if (/*this->get_state() == 1 && */find_match() == 2)
 				_out.push_back(_str);
 		}
 	_file.close();

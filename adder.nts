@@ -28,3 +28,38 @@ o1:1 adder:11
 o2:1 adder:12
 o3:1 adder:13
 cout:1 adder:14
+# lololo
+.chipsets:
+input a4
+input   a5
+        input a6
+input a7
+input b4
+input b5
+  input b6
+input b7
+input cin
+output o4
+output o5
+output o6 
+output   cout2
+
+
+4069 lower
+.links:
+a0:1 adder:7
+a1:1 adder:5
+a3:1  adder:1
+
+
+b0:1 adder:6
+b1:1 adder:4
+b2:1 adder:2
+b3:1 adder:15
+cin:1 adder:9
+o0:1 adder:10
+
+        o1:1 adder:11
+o2:1 adder:12
+o3:1     adder:13
+cout:1 adder:14

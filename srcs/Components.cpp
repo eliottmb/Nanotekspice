@@ -24,6 +24,7 @@ void	Components::init_component_tab()
 	this->_my_components.push_back("4011");
 	this->_my_components.push_back("4013");
 	this->_my_components.push_back("4017");
+	this->_my_components.push_back("4081");
 	this->_my_components.push_back("4030");
 	this->_my_components.push_back("4069");
 	this->_my_components.push_back("4071");
@@ -36,7 +37,7 @@ int		Components::find_in_component_tab(std::string str)
 	int	i = 0;
 	int	tmp;
 
-	while (i < 10)
+	while (i < _my_components.size())
 	{
 		tmp = str.compare(0, 4, this->_my_components[i]);
 		if (tmp == 0)

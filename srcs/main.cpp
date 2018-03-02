@@ -26,9 +26,9 @@ int	main(int argc, char **argv)
 
 	//p->find_links();
 	//p->show_killing_death_vector();
-
-	//pr->print_prompt(p);
 	p->show_pair();
+	pr->print_prompt(p);
+	
 	return (0);
 }
 
