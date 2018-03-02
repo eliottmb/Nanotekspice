@@ -5,19 +5,23 @@
 ## Makefile
 ##
 
-CXX	= clang++ -I./include/
+CXX	= g++ -I./include/
 
 RM	= rm -f
 
-CXXLAGS	+= -W -Wall -Wextra -Werror
+CXXLAGS	+= -W -Wall -Wextra -Werror -std=c++17
 
 NAME		= nanotekspice
 
 SRCS		= 	  srcs/main.cpp			\
-		  	  	  srcs/Parser.cpp		\
-			  	  srcs/ErrorManage.cpp	\
-				  srcs/Link.cpp			\
-				  srcs/Components.cpp
+		  	  srcs/Parser.cpp		\
+		  	  srcs/ErrorManage.cpp	\
+			  srcs/Link.cpp			\
+			  srcs/Components.cpp		\
+			  srcs/AComponent.cpp		\
+			  srcs/gate.cpp			\
+			  srcs/prompt.cpp		\
+
 
 OBJS		= $(SRCS:.cpp=.o)
 

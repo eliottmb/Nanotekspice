@@ -9,7 +9,8 @@
 #include <fstream>
 #include "../include/Parser.hpp"
 #include "../include/ErrorManage.hpp"
-
+#include "../include/prompt.hpp"
+#include <functional>
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -19,6 +20,8 @@ int	main(int argc, char **argv)
 
 	
 	Parser	*p = new Parser(argc, argv);
+
+	Prompt	*pr = new Prompt(argv);
 
 	//p->find_links();
 	//p->show_killing_death_vector();
