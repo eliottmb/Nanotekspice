@@ -32,7 +32,7 @@ std::string	nts::Input::getName() const
 	return _name;
 }
 
-void		nts::Input::setState(nts::Tristate state)
+void		nts::Input::setState(nts::Tristate state, size_t pinNumber)
 {
-	_pin[0] = state;
+	_pin[pinNumber] = state;
 }

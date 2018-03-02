@@ -9,7 +9,7 @@
 # define INPUT_H_
 
 # include "../../include/AComponent.hpp"
-# include "../../include/IComponent.hpp"
+//# include "../../include/IComponent.hpp"
 # include "gate.hpp"
 
 namespace	nts {
@@ -30,7 +30,7 @@ public:
 	virtual void		setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin);
 	virtual void		dump() const;
 	virtual std::string		getName() const;
-	virtual void	setState(nts::Tristate);
+	virtual void	setState(nts::Tristate, size_t);
 };
 
 #endif /* INPUT_H_ */

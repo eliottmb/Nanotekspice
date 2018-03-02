@@ -14,7 +14,9 @@
 # include <map>
 # include <memory>
 # include "IComponent.hpp"
-
+# include "../components/include/Input.hpp"
+# include "../components/include/Output.hpp"
+# include "../components/include/4081.hpp"
 namespace	nts {
 	class AComponent;
 }

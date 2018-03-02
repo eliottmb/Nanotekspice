@@ -15,10 +15,11 @@ nts::C4081::C4081(const std::string &name) : _name(name), nb_in(8), nb_out(4)
 
 nts::Tristate	nts::C4081::compute(std::size_t pin)
 {
-	_pins[3] = my_and(_pins[1], _pins[2]);
-	_pins[4] = my_and(_pins[5], _pins[6]);
-	_pins[10] = my_and(_pins[8], _pins[9]);
-	_pins[11] = my_and(_pins[12], _pins[13]);
+	_pins[2] = my_and(_pins[0], _pins[1]);
+	_pins[3] = my_and(_pins[4], _pins[5]);
+	_pins[9] = my_and(_pins[7], _pins[8]);
+	_pins[10] = my_and(_pins[11], _pins[12]);
+	return _pins[pin];
 }
 
 void		nts::C4081::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
@@ -36,7 +37,7 @@ std::string	nts::C4081::getName() const
 	std::cout << _name << std::endl;
 }
 
-void		nts::C4081::setState(nts::Tristate state)
+void		nts::C4081::setState(nts::Tristate state, size_t pinNumber)
 {
-	return ;
+	_pins[pinNumber] = state;
 }

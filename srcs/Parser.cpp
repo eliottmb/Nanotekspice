@@ -119,6 +119,11 @@ std::vector<std::pair<std::string, std::string>	> Parser::get_comps()
 	return _comps;
 }
 
+std::vector<Link>	Parser::getLinks()
+{
+	return _my_links;
+}
+
 void			Parser::make_pair_vector()
 {
 	unsigned long		i = 0;

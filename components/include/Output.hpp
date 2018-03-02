@@ -9,7 +9,7 @@
 # define OUTPUT_H_
 
 # include "../../include/AComponent.hpp"
-# include "../../include/IComponent.hpp"
+//# include "../../include/IComponent.hpp"
 # include "gate.hpp"
 
 namespace	nts {

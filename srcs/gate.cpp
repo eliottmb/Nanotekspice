@@ -6,7 +6,7 @@
 //
 
 #include "gate.hpp"
-#include "IComponent.hpp"
+//#include "IComponent.hpp"
 
 nts::Tristate    my_and(nts::Tristate a, nts::Tristate b)
 {

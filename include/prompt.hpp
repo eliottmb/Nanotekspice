@@ -8,18 +8,35 @@
 #ifndef PROMPT_T_
 # define PROMPT_T_
 
-# include "AComponent.hpp"
-# include "IComponent.hpp"
+# include <iostream>
+# include <vector>
+# include "../include/IComponent.hpp"
+# include <memory>
 # include "Parser.hpp"
 # include "../components/include/Input.hpp"
 # include "../components/include/4081.hpp"
+# include "../components/include/Output.hpp"
 
-int	dump(Parser *);
-int	display(Parser *);
-int	loop(Parser *);
-int	simulate(Parser *);
+class	Prompt
+{
+	std::vector<std::unique_ptr<nts::IComponent> *>		_ins;
+	std::vector<std::unique_ptr<nts::IComponent> >		_out;
+	std::map<std::string, int (Prompt::*)(Parser *)>	g_funcs;
+	std::unique_ptr<ErrorManage>				e;
+	std::vector<Link>					links;
 
-std::vector<std::unique_ptr<nts::IComponent> *> _ins;
-std::vector<std::unique_ptr<nts::IComponent> *> _out;
+public:
+	Prompt(char **av);
+	~Prompt();
 
-#endif /* PROMPR_H_ */
+	void	print_prompt(Parser *parse);
+	int	dump(Parser *);
+	int	display(Parser *);
+	int	loop(Parser *);
+	int	simulate(Parser *);
+	int	init_Pins(Parser *);
+	int	setInput(std::string str);
+	int	parse_entry(std::string, Parser *);
+};
+
+#endif /* PROMPT_H_ */

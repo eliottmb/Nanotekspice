@@ -13,6 +13,19 @@
 int	g_sig = 0;
 int	g_isLoop = 0;
 
+Prompt::Prompt(char **av)
+{
+	g_funcs["dump"] = &Prompt::dump;
+	g_funcs["simulate"] = &Prompt::simulate;
+	g_funcs["loop"] = &Prompt::loop;
+	g_funcs["display"] = &Prompt::display;
+	e = std::make_unique<ErrorManage>(av[1]);
+}
+
+Prompt::~Prompt()
+{
+}
+
 void	sighandler(int s)
 {
 	std::cout << std::endl;
@@ -22,12 +35,14 @@ void	sighandler(int s)
 		exit(0);
 }
 
-int	simulate(Parser *parse)
+int	Prompt::simulate(Parser *parse)
 {
-	std::cout << "simulate\n";
+	(*(_ins[14]))->setState((*(_ins[0]))->compute(0), 0);
+	(*(_ins[14]))->setState((*(_ins[1]))->compute(0), 1);
+	(*(_ins[14]))->compute(2);
 }
 
-int	loop(Parser *parse)
+int	Prompt::loop(Parser *parse)
 {
 	g_isLoop = 1;
 	std::signal(SIGINT, sighandler);
@@ -37,12 +52,13 @@ int	loop(Parser *parse)
 	return 0;
 }
 
-int	display(Parser *parse)
+int	Prompt::display(Parser *parse)
 {
+	std::cout << /*(*(_ins[14]))->getName() << */"=" << (*(_ins[14]))->compute(2) << std::endl;
 	std::cout << "display\n";
 }
 
-int	dump(Parser *parse)
+int	Prompt::dump(Parser *parse)
 {
 	int		i = 0;
 
@@ -52,24 +68,23 @@ int	dump(Parser *parse)
 	}
 }
 
-int	init_Pins(Parser *parse)
+int	Prompt::init_Pins(Parser *parse)
 {
 	int				i = 0;
 	std::string			elem;
 	nts::AComponent			*comp;
-	std::vector<std::pair<std::string, std::string> >	ins;
+	std::vector<std::pair<std::string, std::string> >	comps;
 
 	comp = new nts::AComponent();
-//	parse->clean_tab();
-	ins = parse->get_comps();
-	while (i < ins.size())
-	{
-		std::cout << ins[i].first << " :::: " << ins[i++].second << std::endl;
-//		_ins.push_back(comp->createComponent(ins[i].first, ins[i++].second));
+	comps = parse->get_comps();
+	std::cout << "test\n";
+	while (i < comps.size()) {
+		_ins.push_back(comp->createComponent(comps[i].first, comps[i].second));
+		i++;
 	}
 }
 
-int	setInput(std::string str)
+int	Prompt::setInput(std::string str)
 {
 	int		intState;
 	std::string	name;
@@ -81,20 +96,16 @@ int	setInput(std::string str)
 		i++;
 	intState = std::stoi(str.substr(str.find("=") + 1, str.size()));
 	if (intState == 1)
-		(*(_ins[i]))->setState((nts::Tristate)1);
+		(*(_ins[i]))->setState((nts::Tristate)1, (size_t)0);
 	else
-		(*(_ins[i]))->setState((nts::Tristate)0);
+		(*(_ins[i]))->setState((nts::Tristate)0, (size_t)0);
 	return (0);
 }
 
-int	parse_entry(std::string str, Parser *parse)
+int	Prompt::parse_entry(std::string str, Parser *parse)
 {
-	std::map<std::string, int (*)(Parser *)>	g_funcs;
 
-	g_funcs["dump"] = &dump;
-	g_funcs["simulate"] = &simulate;
-	g_funcs["loop"] = &loop;
-	g_funcs["display"] = &display;
+
 	if (!g_funcs[str]) {
 		if (str == "exit" || (str.find('=') != std::string::npos && setInput(str) == 1))
 			return 1;
@@ -102,21 +113,19 @@ int	parse_entry(std::string str, Parser *parse)
 			setInput(str);
 		return 0;
 	}
-	g_funcs[str](parse);
+	(this->*g_funcs[str])(parse);
 	return (0);
 }
 
-int	main(int ac, char **av)
+void	Prompt::print_prompt(Parser *parse)
 {
 	std::string	entry;
-	Parser		*parse;
-	ErrorManage	*e = new ErrorManage(av[1]);
 
-	parse = new Parser(ac, av, e);
+	std::cout << "test\n";
 	init_Pins(parse);
 	do {
 		g_isLoop = 2;
-		std::cout << ">";
+		std::cout << "> ";
 		std::cin >> entry;
 	} while (parse_entry(entry, parse) != 1);
 }
