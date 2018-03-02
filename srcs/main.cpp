@@ -10,7 +10,8 @@
 #include "../include/Parser.hpp"
 #include "../include/ErrorManage.hpp"
 #include "../include/prompt.hpp"
-#include <functional>
+#include <memory>
+
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -19,13 +20,15 @@ int	main(int argc, char **argv)
 	ErrorManage	*e = new ErrorManage(argv[1]);
 
 	
-	Parser	*p = new Parser(argc, argv);
+	Parser	*p = new Parser(argv[1]);
 
 	Prompt	*pr = new Prompt(argv);
 
 	//p->find_links();
 	//p->show_killing_death_vector();
-	
+
+	//pr->print_prompt(p);
+	p->show_pair();
 	return (0);
 }
 

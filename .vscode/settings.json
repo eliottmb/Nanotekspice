@@ -27,5 +27,6 @@
         "memory": "cpp",
         "tuple": "cpp",
         "utility": "cpp"
-    }
+    },
+    "editor.tabSize": 8
 }

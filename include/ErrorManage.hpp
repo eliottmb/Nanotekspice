@@ -26,7 +26,7 @@ public:
 	void		check_for_tabs();
 	void		check_for_useless_space();
 	bool		check_for_names();
-	//bool		check_for_struct();
+	bool		check_for_struct();
 	bool		back_in();
 
 	Components	_my_comps;

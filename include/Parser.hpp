@@ -18,9 +18,9 @@
 class	Parser
 {
 	int		_state;
-	std::string	_name;
+	//std::string	_name;
 	std::string _path;
-	std::string _type;
+	//std::string _type;
 	std::ifstream	_file;
 	std::string	_str;
 	Components			_my_comps;
@@ -30,7 +30,7 @@ class	Parser
 	std::vector<Link> _my_links;
 
 public:
-	Parser(int argc, char **argv);
+	Parser(std::string path);
 	~Parser();
 
 	void				set_state();

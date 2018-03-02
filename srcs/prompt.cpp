@@ -8,6 +8,7 @@
 #include <map>
 #include <iostream>
 #include <csignal>
+#include <memory>
 #include "../include/prompt.hpp"
 
 int	g_sig = 0;

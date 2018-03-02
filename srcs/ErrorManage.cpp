@@ -103,32 +103,23 @@ void	ErrorManage::check_for_useless_space()
 bool		ErrorManage::check_for_names()
 {
 	int		i;
-	int		j = 0;
-
+	
 	while (std::getline(this->_file, this->_str))
 	{	
 		i = this->_my_comps.find_in_component_tab(this->_str);
 		if (i != -1)
-			{
-				if (this->_str.c_str()[4] != ' ' || j != 0)
-					return (false);
-				if (this->_str.find(' ') != std::string::npos)
-					return (false);
-				j = j + 1;
-			}
-			if (j > 1)
-				return (false);
+			return (true);
 	}
-	return (true);
+	return (false);
 }
 
 /*bool		ErrorManage::check_for_struct()
 {
 	while (std::getline(this->_file, this->_str))
 		{
-			if (this->_str.find(".chipsets:") == std::string::npos)
-				&& this->_str.size() == 10
-				
+			if ((this->_str.find(".chipsets:") == std::string::npos) && this->_str.size() == 10)
+				|| (this->_str.find(".links:") == std::string::npos) && this->_str.size() == 7)
+				|| (this->_str.find("input "))
 				&& this->_str.find("input ") == std::string::npos
 				&& this->_str.find("output ") == std::string::npos
 				&& this->_str.find(".links") == std::string::npos
@@ -137,7 +128,7 @@ bool		ErrorManage::check_for_names()
 	this->back_in();
 	this->check_for_tab();
 	return (true);
-}*/
+*/
 
 bool		ErrorManage::back_in()
 {

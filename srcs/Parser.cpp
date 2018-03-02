@@ -14,11 +14,11 @@
 #include "../include/Link.hpp"
 #include "../include/ErrorManage.hpp"
 
-Parser::Parser(int argc, char **argv)
+Parser::Parser(std::string path) : _path(path)
 {
 	this->_state = 0;
 	this->_my_comps = Components();
-	this->_file.open(argv[1]);
+	this->_file.open(this->_path.c_str());
 	if (!this->_file.is_open())
 		exit(84);
 	while (std::getline(this->_file, this->_str))
@@ -139,9 +139,14 @@ void			Parser::make_pair_vector()
 		this->_comps.push_back(std::make_pair("output", this->_out[i]));
 		i = i + 1;
 	}
-	this->_comps.push_back(std::make_pair(this->_type, this->_name));
+	this->_file.close();
+	this->_file.open(this->_path.c_str());
+	while (std::getline(this->_file, this->_str))
+	{	
+		if (this->_my_comps.find_in_component_tab(this->_str) != -1)
+			this->_comps.push_back(std::make_pair(this->_str.substr(0, 4), this->_str.substr(5, this->_str.size())));
+	}
 }
-
 
 void			Parser::find_links()
 {

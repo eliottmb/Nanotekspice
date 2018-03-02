@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXX	= g++ -I./include/
+CXX	= g++-6 -I./include/
 
 RM	= rm -f
 
@@ -21,7 +21,9 @@ SRCS		= 	  srcs/main.cpp			\
 			  srcs/AComponent.cpp		\
 			  srcs/gate.cpp			\
 			  srcs/prompt.cpp		\
-
+			  components/srcs/Input.cpp	\
+			  components/srcs/Output.cpp	\
+			  components/srcs/4081.cpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
