@@ -30,7 +30,8 @@ public:
 	virtual void		setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin);
 	virtual void		dump() const;
 	virtual std::string		getName() const;
-	virtual void	setState(nts::Tristate);
+	virtual void	setState(nts::Tristate, size_t);
+	virtual nts::Tristate	getPinAddr(size_t);
 };
 
 #endif /* OUTPUT_H_ */

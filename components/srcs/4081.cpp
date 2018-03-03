@@ -9,7 +9,7 @@
 
 nts::C4081::C4081(const std::string &name) : _name(name), nb_in(8), nb_out(4)
 {
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < 13; i++)
 		_pins.push_back(UNDEFINED);
 }
 
@@ -24,20 +24,28 @@ nts::Tristate	nts::C4081::compute(std::size_t pin)
 
 void		nts::C4081::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
-	return ;
+	_pins[pin] = other.getPinAddr(otherPin);
 }
 
 void		nts::C4081::dump() const
 {
-	std::cout << _name << std::endl;
+	int	i = 0;
+
+	while (i < _pins.size())
+		std::cout << _name << "[" << i << "]" << "=" << _pins[i++] << std::endl;
 }
 
 std::string	nts::C4081::getName() const
 {
-	std::cout << _name << std::endl;
+	return _name;
 }
 
 void		nts::C4081::setState(nts::Tristate state, size_t pinNumber)
 {
 	_pins[pinNumber] = state;
+}
+
+nts::Tristate	nts::C4081::getPinAddr(size_t pinNum)
+{
+	return _pins[pinNum];
 }

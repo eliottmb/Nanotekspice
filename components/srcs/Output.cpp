@@ -24,7 +24,7 @@ void	nts::Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t o
 
 void	nts::Output::dump() const
 {
-	std::cout << "dump\n";
+	std::cout << _name << "=" << _pin[0] << std::endl;
 }
 
 std::string	nts::Output::getName() const
@@ -32,7 +32,12 @@ std::string	nts::Output::getName() const
 	return _name;
 }
 
-void		nts::Output::setState(nts::Tristate state)
+void		nts::Output::setState(nts::Tristate state, size_t pinNumber)
 {
 	_pin[0] = state;
+}
+
+nts::Tristate	nts::Output::getPinAddr(size_t pin)
+{
+	return _pin[pin];
 }

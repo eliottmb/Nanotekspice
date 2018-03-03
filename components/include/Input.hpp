@@ -31,6 +31,7 @@ public:
 	virtual void		dump() const;
 	virtual std::string		getName() const;
 	virtual void	setState(nts::Tristate, size_t);
+	virtual nts::Tristate	getPinAddr(size_t);
 };
 
 #endif /* INPUT_H_ */

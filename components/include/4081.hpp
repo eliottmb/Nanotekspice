@@ -9,7 +9,6 @@
 # define C4081_H_
 
 # include "../../include/AComponent.hpp"
-//# include "../../include/IComponent.hpp"
 # include "gate.hpp"
 
 # include <vector>
@@ -36,6 +35,7 @@ public:
 	virtual void		dump() const;
 	virtual std::string		getName() const;
 	virtual void	setState(nts::Tristate, size_t);
+	virtual nts::Tristate	getPinAddr(size_t);
 };
 
 #endif /* C4081_H_ */

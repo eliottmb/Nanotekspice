@@ -10,31 +10,25 @@
 
 nts::Tristate    my_and(nts::Tristate a, nts::Tristate b)
 {
-	if (a == 1 && b == 1)
-		return nts::TRUE;
-	return nts::FALSE;
+	return (nts::Tristate)(a && b);
 }
 
 nts::Tristate    my_nand(nts::Tristate a, nts::Tristate b)
 {
-	return nts::TRUE;
-	//return (!(a && b));
+	return (nts::Tristate)(!(a && b));
 }
 
 nts::Tristate    my_or(nts::Tristate a, nts::Tristate b)
 {
-	return nts::TRUE;
-	//return (a || b);
+	return (nts::Tristate)(a || b);
 }
 
 nts::Tristate    my_nor(nts::Tristate a, nts::Tristate b)
 {
-	return nts::TRUE;
-	//return (!(a || b));
+	return (nts::Tristate)(!(a || b));
 }
 
 nts::Tristate    my_xor(nts::Tristate a, nts::Tristate b)
 {
-	return nts::TRUE;
-	//return (a != b && (a || b));
+	return (nts::Tristate)(a != b && (a || b));
 }

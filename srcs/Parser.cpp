@@ -33,6 +33,7 @@ Parser::Parser(std::string path) : _path(path)
 	_file.close();
 	this->clean_tab();
 	this->make_pair_vector();
+	this->find_links();
 }
 
 Parser::~Parser()
@@ -142,7 +143,7 @@ void			Parser::make_pair_vector()
 	this->_file.close();
 	this->_file.open(this->_path.c_str());
 	while (std::getline(this->_file, this->_str))
-	{	
+	{
 		if (this->_my_comps.find_in_component_tab(this->_str) != -1)
 			this->_comps.push_back(std::make_pair(this->_str.substr(0, 4), this->_str.substr(5, this->_str.size())));
 	}
@@ -152,6 +153,7 @@ void			Parser::find_links()
 {
 	int		i = 0;
 
+	this->_file.close();
 	this->_file.open(this->_path.c_str());
     if (!this->_file.is_open())
 		exit(84);
@@ -194,4 +196,9 @@ void	Parser::show_killing_death_vector()
 		std::cout << "Lien " << i << " : " << this->_my_links[i]._comp << "->" << this->_my_links[i]._pin << "\t\t#--------#\t" << this->_my_links[i]._comp1 << "->" << this->_my_links[i]._pin1 << std::endl;
 		i = i + 1;
 	}
+}
+
+std::vector<std::string>	Parser::get_out()
+{
+	return _out;
 }

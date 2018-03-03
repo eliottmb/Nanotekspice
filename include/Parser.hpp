@@ -45,6 +45,7 @@ public:
 	void			fill_map();
 	void			show_killing_death_vector();
 	std::vector<Link>	getLinks();
+	std::vector<std::string>	get_out();
 
 private:
 

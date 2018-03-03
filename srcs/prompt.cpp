@@ -38,9 +38,20 @@ void	sighandler(int s)
 
 int	Prompt::simulate(Parser *parse)
 {
-	(*(_ins[14]))->setState((*(_ins[0]))->compute(0), 0);
-	(*(_ins[14]))->setState((*(_ins[1]))->compute(0), 1);
-	(*(_ins[14]))->compute(2);
+	nts::Tristate	state;
+	size_t	pin;
+
+	for (int j = 0; j < links.size(); j++)
+		for (int i = 0; i < _ins.size(); i++)
+			if ((*(_ins[i]))->getName() == links[j]._comp)
+				for (int k = 0; k < _ins.size(); k++) {
+					if ((*(_ins[k]))->getName() == links[j]._comp1) {
+						(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(stoul(links[j]._pin) -1), stoul(links[j]._pin1) - 1);
+					}
+					(*(_ins[i]))->compute();
+				}
+	for (int i = 0; i < _ins.size(); i++)
+		(*(_ins[i]))->compute();
 }
 
 int	Prompt::loop(Parser *parse)
@@ -55,8 +66,13 @@ int	Prompt::loop(Parser *parse)
 
 int	Prompt::display(Parser *parse)
 {
-	std::cout << /*(*(_ins[14]))->getName() << */"=" << (*(_ins[14]))->compute(2) << std::endl;
-	std::cout << "display\n";
+	std::vector<std::string>	outs = parse->get_out();
+
+	for (int i = 0; i < outs.size(); i++) {
+		for (int j = 0; j < _ins.size(); j++)
+			if ((*(_ins[j]))->getName() == outs[i])
+				(*(_ins[j]))->dump();
+	}
 }
 
 int	Prompt::dump(Parser *parse)
@@ -64,8 +80,7 @@ int	Prompt::dump(Parser *parse)
 	int		i = 0;
 
 	while (i < _ins.size()) {
-		std::cout << (*(_ins[i]))->getName() << "=";
-		std::cout << (*(_ins[i++]))->compute() << std::endl;
+		(*(_ins[i++]))->dump();
 	}
 }
 
@@ -78,8 +93,7 @@ int	Prompt::init_Pins(Parser *parse)
 
 	comp = new nts::AComponent();
 	comps = parse->get_comps();
-	//std::cout << "test\n";
-	parse->show_pair();
+	links = parse->getLinks();
 	while (i < comps.size()) {
 		_ins.push_back(comp->createComponent(comps[i].first, comps[i].second));
 		i++;
@@ -96,6 +110,8 @@ int	Prompt::setInput(std::string str)
 	name = str.substr(0, str.find("="));
 	while (i < _ins.size() && (*(_ins[i]))->getName() != name)
 		i++;
+	if (i == _ins.size())
+	    return 1;
 	intState = std::stoi(str.substr(str.find("=") + 1, str.size()));
 	if (intState == 1)
 		(*(_ins[i]))->setState((nts::Tristate)1, (size_t)0);

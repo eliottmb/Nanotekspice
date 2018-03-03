@@ -29,6 +29,7 @@ namespace	nts
 		virtual	void		dump() const = 0;
 		virtual std::string	getName() const = 0;
 		virtual void		setState(nts::Tristate, size_t) = 0;
+		virtual nts::Tristate	getPinAddr(size_t) = 0;
 	};
 }
 
