@@ -46,7 +46,10 @@ int	Prompt::simulate(Parser *parse)
 			if ((*(_ins[i]))->getName() == links[j]._comp)
 				for (int k = 0; k < _ins.size(); k++) {
 					if ((*(_ins[k]))->getName() == links[j]._comp1) {
-						(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(stoul(links[j]._pin) -1), stoul(links[j]._pin1) - 1);
+						(*(_ins[k]))->setState((*(_ins[i]))->
+								       getPinAddr(stoul(links[j]._pin) - 1),
+								       stoul(links[j]._pin1) - 1);
+//						(*(_ins[i]))->setState((*(_ins[k]))->getPinAddr(stoul(links[i]._pin) - 1), stoul(links[j]._pin1) - 1);
 					}
 					(*(_ins[i]))->compute();
 				}
@@ -111,7 +114,8 @@ int	Prompt::setInput(std::string str)
 	while (i < _ins.size() && (*(_ins[i]))->getName() != name)
 		i++;
 	if (i == _ins.size())
-	    return 1;
+	    return 0;
+	std::cout << "setInput\n";
 	intState = std::stoi(str.substr(str.find("=") + 1, str.size()));
 	if (intState == 1)
 		(*(_ins[i]))->setState((nts::Tristate)1, (size_t)0);
@@ -135,12 +139,17 @@ int	Prompt::parse_entry(std::string str, Parser *parse)
 	return (0);
 }
 
-void	Prompt::print_prompt(Parser *parse)
+void	Prompt::print_prompt(Parser *parse, char **av)
 {
 	std::string	entry;
+	int		i = 2;
 
-	std::cout << "test\n";
 	init_Pins(parse);
+	if (av[2])
+		while (av[i])
+			parse_entry(av[i++], parse);
+	simulate(parse);
+	display(parse);
 	do {
 		g_isLoop = 2;
 		std::cout << "> ";

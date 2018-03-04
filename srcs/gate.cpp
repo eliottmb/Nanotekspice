@@ -10,6 +10,9 @@
 
 nts::Tristate    my_and(nts::Tristate a, nts::Tristate b)
 {
+	if (a == nts::TRUE && b == nts::TRUE)
+		return nts::TRUE;
+	return nts::FALSE;
 	return (nts::Tristate)(a && b);
 }
 

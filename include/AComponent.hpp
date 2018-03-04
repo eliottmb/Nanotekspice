@@ -37,6 +37,11 @@ private:
 	std::unique_ptr<nts::IComponent>	*createInput(const std::string &value) const;
 	std::unique_ptr<nts::IComponent>	*createOutput(const std::string &value) const;
 	std::unique_ptr<nts::IComponent>	*create4081(const std::string &value) const;
+	std::unique_ptr<nts::IComponent>	*create4001(const std::string &value) const;
+	std::unique_ptr<nts::IComponent>	*create4011(const std::string &value) const;
+	std::unique_ptr<nts::IComponent>	*create4030(const std::string &value) const;
+	std::unique_ptr<nts::IComponent>	*create4069(const std::string &value) const;
+	std::unique_ptr<nts::IComponent>	*create4071(const std::string &value) const;
 };
 
 #endif /* ACOMP_H_ */

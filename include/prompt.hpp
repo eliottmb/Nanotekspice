@@ -29,7 +29,7 @@ public:
 	Prompt(char **av);
 	~Prompt();
 
-	void	print_prompt(Parser *parse);
+	void	print_prompt(Parser *parse, char **av);
 	int	dump(Parser *);
 	int	display(Parser *);
 	int	loop(Parser *);
