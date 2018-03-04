@@ -15,7 +15,7 @@ output s3
 .links:
 a0:1 gate:1
 b0:1 gate:2
-gate:3 s0:1
+s0:1 gate:3
 a1:1 gate:5
 b1:1 gate:6
 gate:4 s1:1

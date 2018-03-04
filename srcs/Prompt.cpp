@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// nanotekspice
+// nts
 // File description:
-// simulate chipsets
+//
 //
 
 #include <map>
@@ -36,25 +36,32 @@ void	sighandler(int s)
 		exit(0);
 }
 
+int	Prompt::getRightComp(std::string name)
+{
+	for (int i = 0; i < _ins.size(); i++)
+		if ((*(_ins[i]))->getName() == name)
+			return (i);
+	return -1;
+}
 
 int	Prompt::simulate(Parser *parse)
 {
 	nts::Tristate	state;
 	size_t	pin;
-//	std::unique_ptr<nts::IComponent>	comp;
-//	std::unique_ptr<nts::IComponent>	comp2;
+	int	i;
+	int	k;
 
 	for (int j = 0; j < links.size(); j++) {
 		for (int i = 0; i < _ins.size(); i++) {
-			//comp = (*(_ins[i]));
 			if ((*(_ins[i]))->getName() == links[j]._comp)
 				for (int k = 0; k < _ins.size(); k++) {
 					//comp2 = (*(_ins[k]));
 					if ((*(_ins[k]))->getName() == links[j]._comp1)
-						(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(stoul(links[j]._pin) - 1),
-						stoul(links[j]._pin1) - 1);
+//		if ((*(_ins[i])) != nullptr && (*(_ins[k])) != nullptr) {
+					(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(
+								       stoul(links[j]._pin) - 1),
+							       stoul(links[j]._pin1) - 1);
 					(*(_ins[i]))->compute();
-
 				}
 		}
 	}
@@ -96,9 +103,9 @@ int	Prompt::dump(Parser *parse)
 
 int	Prompt::init_Pins(Parser *parse)
 {
-	int							i = 0;
-	std::string						elem;
-	nts::AComponent						*comp;
+	int				i = 0;
+	std::string			elem;
+	nts::AComponent			*comp;
 	std::vector<std::pair<std::string, std::string> >	comps;
 
 	comp = new nts::AComponent();
@@ -132,6 +139,8 @@ int	Prompt::setInput(std::string str)
 
 int	Prompt::parse_entry(std::string str, Parser *parse)
 {
+
+
 	if (!g_funcs[str]) {
 		if (str == "exit" || (str.find('=') != std::string::npos && setInput(str) == 1))
 			return 1;

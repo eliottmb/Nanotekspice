@@ -9,7 +9,7 @@
 
 nts::Output::Output(const std::string &name) : _name(name)
 {
-	_pin.push_back(FALSE);
+	_pin.push_back(nts::FALSE);
 }
 
 nts::Tristate	nts::Output::compute(std::size_t pin)

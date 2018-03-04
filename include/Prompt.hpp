@@ -37,6 +37,7 @@ public:
 	int	init_Pins(Parser *);
 	int	setInput(std::string str);
 	int	parse_entry(std::string, Parser *);
+	int	getRightComp(std::string);
 };
 
 #endif /* PROMPT_H_ */

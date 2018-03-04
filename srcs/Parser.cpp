@@ -126,24 +126,21 @@ void							Parser::make_pair_vector()
 {
 	unsigned long		i = 0;
 
-	while (i < this->_in.size())
-	{
+	while (i < this->_in.size()) {
 		this->_comps.push_back(std::make_pair("input", this->_in[i]));
 		i = i + 1;
 	}
 	i = 0;
-	while (i < this->_out.size())
-	{
+	while (i < this->_out.size()) {
 		this->_comps.push_back(std::make_pair("output", this->_out[i]));
 		i = i + 1;
 	}
 	this->_file.close();
 	this->_file.open(this->_path.c_str());
 	while (std::getline(this->_file, this->_str))
-	{
 		if (this->_my_comps.find_in_component_tab(this->_str) != -1)
-			this->_comps.push_back(std::make_pair(this->_str.substr(0, 4), this->_str.substr(5, this->_str.size())));
-	}
+			this->_comps.push_back(std::make_pair(this->_str.substr(0, 4),
+							      this->_str.substr(5, this->_str.size())));
 }
 
 void							Parser::check_names_in_vector()
@@ -154,7 +151,7 @@ void							Parser::check_names_in_vector()
 	while (i < this->_comps.size())
 	{
 		j = i + 1;
-		std::cout << this->_comps[i].second << std::endl;
+//		std::cout << this->_comps[i].second << std::endl;
 		while (j < this->_comps.size())
 		{
 			if (this->_comps[i].second == this->_comps[j].second
@@ -210,7 +207,7 @@ void							Parser::check_links()
 {
 	int		i = 0;
 	int		j;
-	
+
 	while (i < this->_my_links.size())
 	{
 		j = 0;
