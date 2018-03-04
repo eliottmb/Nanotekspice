@@ -52,8 +52,9 @@ int	Prompt::simulate(Parser *parse)
 					//comp2 = (*(_ins[k]));
 					if ((*(_ins[k]))->getName() == links[j]._comp1)
 						(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(stoul(links[j]._pin) - 1),
-								       stoul(links[j]._pin1) - 1);
+						stoul(links[j]._pin1) - 1);
 					(*(_ins[i]))->compute();
+
 				}
 		}
 	}

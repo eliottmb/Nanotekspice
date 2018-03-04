@@ -15,7 +15,7 @@ NAME		= nanotekspice
 
 SRCS		= 	  srcs/Main.cpp			\
 		  	  srcs/Parser.cpp		\
-		  	  srcs/ErrorManage.cpp	\
+		  	  srcs/ErrorManage.cpp		\
 			  srcs/Link.cpp			\
 			  srcs/Components.cpp		\
 			  srcs/AComponent.cpp		\

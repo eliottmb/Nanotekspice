@@ -154,7 +154,7 @@ void							Parser::check_names_in_vector()
 	while (i < this->_comps.size())
 	{
 		j = i + 1;
-		std::cout <<  this->_comps[i].second << std::endl;
+		std::cout << this->_comps[i].second << std::endl;
 		while (j < this->_comps.size())
 		{
 			if (this->_comps[i].second == this->_comps[j].second
@@ -244,7 +244,11 @@ void							Parser::show_killing_death_vector()
 
 	while (i < this->_my_links.size())
 	{
-		std::cout << "Lien " << i << " : " << this->_my_links[i]._comp << "->" << this->_my_links[i]._pin << "\t\t#--------#\t" << this->_my_links[i]._comp1 << "->" << this->_my_links[i]._pin1 << std::endl;
+		std::cout << "Lien " << i << " : " <<
+			this->_my_links[i]._comp << "->" <<
+			this->_my_links[i]._pin << "\t\t#--------#\t"
+			  << this->_my_links[i]._comp1 << "->"
+			  << this->_my_links[i]._pin1 << std::endl;
 		i = i + 1;
 	}
 }

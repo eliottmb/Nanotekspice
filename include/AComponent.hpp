@@ -37,7 +37,7 @@ public:
 
 public:
 	std::unique_ptr<nts::IComponent>	*createComponent(const std::string &type,
-								const std::string &value);
+								 const std::string &value);
 
 private:
 	std::unique_ptr<nts::IComponent>	*createInput(const std::string &value) const;

@@ -15,10 +15,10 @@ Link::Link(std::string c, std::string p, std::string c1, std::string p1)
 
 Link::Link()
 {
-    _comp = "UNDEFINED";
-    _pin = "UNDEFINED";
-    _comp1 = "UNDEFINED";
-    _pin1 = "UNDEFINED";
+	_comp = "UNDEFINED";
+	_pin = "UNDEFINED";
+	_comp1 = "UNDEFINED";
+	_pin1 = "UNDEFINED";
 }
 
 Link::~Link()

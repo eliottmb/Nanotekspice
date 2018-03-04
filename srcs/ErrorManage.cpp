@@ -15,7 +15,7 @@ ErrorManage::ErrorManage(std::string path)
 	this->_path = path;
 	this->_file.open(this->_path.c_str());
 	this->_douille.open(std::string("tmp_file.txt").c_str());
-	if (!this->_file.is_open() || !this->_douille.is_open()) 
+	if (!this->_file.is_open() || !this->_douille.is_open())
 		exit(84);
 	this->do_all_checks();
 }
@@ -166,13 +166,13 @@ bool		ErrorManage::back_in()
 	i = std::rename(std::string("tmp_file.txt").c_str(), this->_path.c_str());
 	if (i != 0)
 	{
-		std::cout << "ERROR 1" << i <<std::endl;	
+		std::cout << "ERROR 1" << i <<std::endl;
 		std::perror("rename");
 		return (false);
 	}
 	this->_file.open(this->_path.c_str());
     	this->_douille.open(std::string("tmp_file.txt").c_str());
-    	if (!this->_file.is_open() || !this->_douille.is_open()) 
+    	if (!this->_file.is_open() || !this->_douille.is_open())
 		exit(84);
 	return (true);
 }

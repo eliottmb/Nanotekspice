@@ -20,5 +20,4 @@ nts::Tristate	my_or(nts::Tristate a, nts::Tristate b);
 nts::Tristate	my_nor(nts::Tristate a, nts::Tristate b);
 nts::Tristate	my_xor(nts::Tristate a, nts::Tristate b);
 
-
 #endif

@@ -36,4 +36,4 @@ namespace nts {
 	};
 };
 
-#endif /*_ C4011_HPP__ */
+#endif /*__C4011_HPP__ */
