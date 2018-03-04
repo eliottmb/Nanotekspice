@@ -6,7 +6,7 @@
         {
             "label": "echo",
             "type": "shell",
-            "command": "rm -rf log;make re;cp adder.nts basics;",
+            "command": "rm -rf log;make re$;cp adder.nts basics;",
             "group": {
                 "kind": "build",
                 "isDefault": true

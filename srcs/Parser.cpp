@@ -34,6 +34,9 @@ Parser::Parser(std::string path) : _path(path)
 	this->clean_tab();
 	this->make_pair_vector();
 	this->find_links();
+	this->check_links();
+	std::cout << "LOLOLOLOLOLOLO" << std::endl;
+	show_killing_death_vector();
 }
 
 Parser::~Parser()
@@ -185,6 +188,40 @@ void	Parser::fill_map()
 	tmp = tmp.substr(pos + 1, tmp.size() - pos - 1);
 	l = Link(name_comp, nb_pin, name_comp1, tmp);
 	this->_my_links.push_back(l);
+}
+
+void	Parser::check_links()
+{
+	int		i = 0;
+	int		j;
+	
+	while (i < this->_my_links.size())
+	{
+		j = 0;
+		while (j < this->_out.size())
+		{
+			if (this->_my_links[i]._comp == this->_out[j])
+			{
+				this->_my_links[i] = this->reverse_link(this->_my_links[i]);
+			}
+			j = j + 1;
+		}
+		i = i + 1;
+	}
+}
+
+Link	Parser::reverse_link(Link l)
+{
+	std::string	tmp_name;
+	std::string	tmp_pin;
+
+	tmp_name = l._comp;
+	tmp_pin = l._pin;
+	l._comp = l._comp1;
+	l._pin = l._pin1;
+	l._comp1 = tmp_name;
+	l._pin1 = tmp_pin;
+	return (l);
 }
 
 void	Parser::show_killing_death_vector()

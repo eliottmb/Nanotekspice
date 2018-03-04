@@ -11,8 +11,9 @@ input cin
 output o0
 output o1
 output o2
+output o3
 output cout
-4008 adder
+4081 adder
 .links:
 a0:1 adder:7
 a1:1 adder:5
