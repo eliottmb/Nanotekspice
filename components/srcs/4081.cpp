@@ -32,7 +32,11 @@ void		nts::C4081::dump() const
 	int	i = 0;
 
 	while (i < _pins.size()) {
-		std::cout << _name << "[" << i + 1 << "]" << "=" << _pins[i] << std::endl;
+		std::cout << _name << "[" << i << "]" << "=";
+		if (_pins[i] == nts::UNDEFINED)
+			std::cout << "U\n";
+		else
+			std::cout << _pins[i] << std::endl;
 		i++;
 	}
 }

@@ -65,9 +65,11 @@ int	Prompt::loop(Parser *parse)
 {
 	g_isLoop = 1;
 	std::signal(SIGINT, sighandler);
-	while (1)
+	while (1) {
+		simulate(parse);
 		if (g_sig != 0)
 			break;
+	}
 	return 0;
 }
 
@@ -119,7 +121,6 @@ int	Prompt::setInput(std::string str)
 		i++;
 	if (i == _ins.size())
 	    return 0;
-	std::cout << "setInput\n";
 	intState = std::stoi(str.substr(str.find("=") + 1, str.size()));
 	if (intState == 1)
 		(*(_ins[i]))->setState((nts::Tristate)1, (size_t)0);

@@ -24,7 +24,11 @@ void	nts::Input::setLink(std::size_t pin, nts::IComponent &other, std::size_t ot
 
 void	nts::Input::dump() const
 {
-	std::cout << _name << "=" << _pin[0] << std::endl;
+	std::cout << _name << "=";
+	if (_pin[0] == nts::UNDEFINED)
+		std::cout << "U\n";
+	else
+		std::cout << _pin[0] << std::endl;
 }
 
 std::string	nts::Input::getName() const

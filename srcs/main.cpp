@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	//p->find_links();
 	//p->show_killing_death_vector();
 //	p->show_pair();
-	//pr->print_prompt(p, argv);
+	pr->print_prompt(p, argv);
 
 	return (0);
 }

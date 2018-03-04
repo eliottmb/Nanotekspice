@@ -31,8 +31,14 @@ void		nts::C4011::dump() const
 {
 	int	i = 0;
 
-	while (i < _pins.size())
-		std::cout << _name << "[" << i << "]" << "=" << _pins[i++] << std::endl;
+	while (i < _pins.size()) {
+		std::cout << _name << "[" << i << "]" << "=";
+		if (_pins[i] == nts::UNDEFINED)
+			std::cout << "U\n";
+		else
+			std::cout << _pins[i] << std::endl;
+		i++;
+	}
 }
 
 std::string	nts::C4011::getName() const
