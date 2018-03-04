@@ -20,16 +20,11 @@ Components::~Components()
 void	Components::init_component_tab()
 {
 	this->_my_components.push_back("4001");
-	this->_my_components.push_back("4008");
 	this->_my_components.push_back("4011");
-	this->_my_components.push_back("4013");
-	this->_my_components.push_back("4017");
-	this->_my_components.push_back("4081");
 	this->_my_components.push_back("4030");
 	this->_my_components.push_back("4069");
 	this->_my_components.push_back("4071");
-	this->_my_components.push_back("4094");
-	this->_my_components.push_back("4514");
+	this->_my_components.push_back("4081");
 }
 
 int		Components::find_in_component_tab(std::string str)
