@@ -23,6 +23,11 @@ SRCS		= 	  srcs/main.cpp			\
 			  srcs/prompt.cpp		\
 			  components/srcs/Input.cpp	\
 			  components/srcs/Output.cpp	\
+			  components/srcs/4001.cpp	\
+			  components/srcs/4011.cpp	\
+			  components/srcs/4030.cpp	\
+			  components/srcs/4069.cpp	\
+			  components/srcs/4071.cpp	\
 			  components/srcs/4081.cpp
 
 OBJS		= $(SRCS:.cpp=.o)

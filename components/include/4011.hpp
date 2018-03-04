@@ -1,33 +1,41 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// 4011
+// File description:
+//
 //
 
-#ifndef __4011_HPP__
-# define __4011_HPP__
+#ifndef	__C4011_HPP__
+# define __C4011_HPP__
 
-#include "IComponent.hpp"
+# include "AComponent.hpp"
+# include "gate.hpp"
 
-#include <vector>
+# include <vector>
 
 namespace nts {
 	class C4011;
 };
 
-class	C4011 : public nts::IComponent
+class	nts::C4011 : public nts::IComponent
 {
 	const int	nb_in;
 	const int	nb_out;
-	
+
 	std::string			_name;
 	std::vector<nts::Tristate>	_pins;
 
 public:
-	C4011(std::string);
+	C4011(const std::string &name);
 	virtual ~C4011() {};
+
+public:
+	virtual nts::Tristate	compute(std::size_t pin = 1);
+	virtual void		setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin);
+	virtual void		dump() const;
+	virtual std::string	getName() const;
+	virtual void		setState(nts::Tristate, size_t);
+	virtual nts::Tristate	getPinAddr(size_t);
 };
 
-
-#endif /* __4011_HPP__ */
+#endif /*_ C4011_HPP__ */

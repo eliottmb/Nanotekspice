@@ -5,10 +5,10 @@
 //
 //
 
-#ifndef	C4081_H_
-# define C4081_H_
+#ifndef __C4081_HPP__
+# define __C4081_HPP__
 
-# include "../../include/AComponent.hpp"
+# include "AComponent.hpp"
 # include "gate.hpp"
 
 # include <vector>
@@ -33,9 +33,9 @@ public:
 	virtual nts::Tristate	compute(std::size_t pin = 1);
 	virtual void		setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin);
 	virtual void		dump() const;
-	virtual std::string		getName() const;
-	virtual void	setState(nts::Tristate, size_t);
+	virtual std::string	getName() const;
+	virtual void		setState(nts::Tristate, size_t);
 	virtual nts::Tristate	getPinAddr(size_t);
 };
 
-#endif /* C4081_H_ */
+#endif /* __C4081_HPP__ */
