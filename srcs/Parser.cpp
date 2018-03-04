@@ -151,7 +151,6 @@ void							Parser::check_names_in_vector()
 	while (i < this->_comps.size())
 	{
 		j = i + 1;
-//		std::cout << this->_comps[i].second << std::endl;
 		while (j < this->_comps.size())
 		{
 			if (this->_comps[i].second == this->_comps[j].second

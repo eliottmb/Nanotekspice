@@ -34,8 +34,6 @@ bool	ErrorManage::do_all_checks()
 	this->check_for_useless_space();
 	if (this->check_for_names() == false)
 		return (false);
-	/*if (check_for_struct() == false)
-		return (false);*/
 	return (true);
 }
 
@@ -44,7 +42,7 @@ void	ErrorManage::check_for_coms()
 	unsigned long	found;
 
 	while (std::getline(this->_file, this->_str))
-	{	
+	{
 		found = this->_str.find("#");
 			if (found == std::string::npos)
 				this->_douille << this->_str << std::endl;
@@ -65,9 +63,9 @@ void    ErrorManage::check_for_empty_line()
 void    ErrorManage::check_for_tabs()
 {
 	int		found;
-	
+
 	while (std::getline(this->_file, this->_str))
-	{	
+	{
 		do
 		{
 			found = this->_str.find('\t');
@@ -84,7 +82,7 @@ void	ErrorManage::check_for_useless_space()
 	unsigned long		found;
 
 	while (std::getline(this->_file, this->_str))
-	{	
+	{
 		do
 		{
 			while (this->_str.c_str()[0] == ' ')
@@ -104,9 +102,9 @@ void	ErrorManage::check_for_useless_space()
 bool		ErrorManage::check_for_names()
 {
 	int		i;
-	
+
 	while (std::getline(this->_file, this->_str))
-	{	
+	{
 		i = this->_my_comps.find_in_component_tab(this->_str);
 		if (i != -1)
 			return (true);
@@ -130,7 +128,7 @@ bool		ErrorManage::check_for_struct()
 			if (this->_str.find("output ") != std::string::npos && this->_str.size() >= 8)
 				std::cout << "lolo" << std::endl;
 			if (this->_my_comps.find_in_component_tab(this->_str) != -1 && this->_str.size() == 5)
-				std::cout << "lulu" << std::endl;				
+				std::cout << "lulu" << std::endl;
 			else if (check_for_links(this->_str) == true)
 				return (true);
 		}

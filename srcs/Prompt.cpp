@@ -48,16 +48,12 @@ int	Prompt::simulate(Parser *parse)
 {
 	nts::Tristate	state;
 	size_t	pin;
-	int	i;
-	int	k;
 
 	for (int j = 0; j < links.size(); j++) {
 		for (int i = 0; i < _ins.size(); i++) {
 			if ((*(_ins[i]))->getName() == links[j]._comp)
 				for (int k = 0; k < _ins.size(); k++) {
-					//comp2 = (*(_ins[k]));
 					if ((*(_ins[k]))->getName() == links[j]._comp1)
-//		if ((*(_ins[i])) != nullptr && (*(_ins[k])) != nullptr) {
 					(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(
 								       stoul(links[j]._pin) - 1),
 							       stoul(links[j]._pin1) - 1);
@@ -139,8 +135,6 @@ int	Prompt::setInput(std::string str)
 
 int	Prompt::parse_entry(std::string str, Parser *parse)
 {
-
-
 	if (!g_funcs[str]) {
 		if (str == "exit" || (str.find('=') != std::string::npos && setInput(str) == 1))
 			return 1;
@@ -166,6 +160,6 @@ void	Prompt::print_prompt(Parser *parse, char **av)
 	do {
 		g_isLoop = 2;
 		std::cout << "> ";
-		std::cin >> entry;
-	} while (parse_entry(entry, parse) != 1);
+		std::getline(std::cin, entry);
+	} while (!std::cin.eof() && parse_entry(entry, parse) != 1);
 }
