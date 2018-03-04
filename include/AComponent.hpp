@@ -17,6 +17,12 @@
 # include "../components/include/Input.hpp"
 # include "../components/include/Output.hpp"
 # include "../components/include/4081.hpp"
+# include "../components/include/4001.hpp"
+# include "../components/include/4011.hpp"
+# include "../components/include/4030.hpp"
+# include "../components/include/4069.hpp"
+# include "../components/include/4071.hpp"
+
 namespace	nts {
 	class AComponent;
 }

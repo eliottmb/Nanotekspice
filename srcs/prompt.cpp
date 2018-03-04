@@ -36,23 +36,27 @@ void	sighandler(int s)
 		exit(0);
 }
 
+
 int	Prompt::simulate(Parser *parse)
 {
 	nts::Tristate	state;
 	size_t	pin;
+//	std::unique_ptr<nts::IComponent>	comp;
+//	std::unique_ptr<nts::IComponent>	comp2;
 
-	for (int j = 0; j < links.size(); j++)
-		for (int i = 0; i < _ins.size(); i++)
+	for (int j = 0; j < links.size(); j++) {
+		for (int i = 0; i < _ins.size(); i++) {
+			//comp = (*(_ins[i]));
 			if ((*(_ins[i]))->getName() == links[j]._comp)
 				for (int k = 0; k < _ins.size(); k++) {
-					if ((*(_ins[k]))->getName() == links[j]._comp1) {
-						(*(_ins[k]))->setState((*(_ins[i]))->
-								       getPinAddr(stoul(links[j]._pin) - 1),
+					//comp2 = (*(_ins[k]));
+					if ((*(_ins[k]))->getName() == links[j]._comp1)
+						(*(_ins[k]))->setState((*(_ins[i]))->getPinAddr(stoul(links[j]._pin) - 1),
 								       stoul(links[j]._pin1) - 1);
-//						(*(_ins[i]))->setState((*(_ins[k]))->getPinAddr(stoul(links[i]._pin) - 1), stoul(links[j]._pin1) - 1);
-					}
 					(*(_ins[i]))->compute();
 				}
+		}
+	}
 	for (int i = 0; i < _ins.size(); i++)
 		(*(_ins[i]))->compute();
 }
