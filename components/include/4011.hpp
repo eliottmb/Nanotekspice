@@ -1,23 +1,23 @@
 //
 // EPITECH PROJECT, 2018
-// 4011
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #ifndef	__C4011_HPP__
 # define __C4011_HPP__
 
 # include "AComponent.hpp"
-# include "gate.hpp"
+# include "Gate.hpp"
 
 # include <vector>
 
 namespace nts {
 	class	C4011 : public nts::IComponent
 	{
-		const int	nb_in;
-		const int	nb_out;
+		const int			nb_in;
+		const int			nb_out;
 
 		std::string			_name;
 		std::vector<nts::Tristate>	_pins;

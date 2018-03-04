@@ -1,8 +1,8 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// nanotekspice
+// File description:
+// simulate chipsets
 //
 
 #include <iostream>
@@ -23,20 +23,17 @@ Parser::Parser(std::string path) : _path(path)
 		exit(84);
 	while (std::getline(this->_file, this->_str))
 		{
-			/*if (find_match() == 0)
-			  	this->set_state();*/
-			if (/*this->get_state() == 1 && */find_match() == 1)
+			if (find_match() == 1)
 				_in.push_back(_str);
-			else if (/*this->get_state() == 1 && */find_match() == 2)
+			else if (find_match() == 2)
 				_out.push_back(_str);
 		}
 	_file.close();
 	this->clean_tab();
 	this->make_pair_vector();
+	this->check_names_in_vector();
 	this->find_links();
 	this->check_links();
-	std::cout << "LOLOLOLOLOLOLO" << std::endl;
-	show_killing_death_vector();
 }
 
 Parser::~Parser()
@@ -44,23 +41,20 @@ Parser::~Parser()
 	_file.close();
 }
 
-void	Parser::set_state()
+void							Parser::set_state()
 {
 	this->_state = this->_state + 1;
 
 	if (this->_state >= 2)
-		{
-			std::cout << "Is there a trouble in here" << std::endl;\
-			this->_state = 2;
-		}
+		this->_state = 2;
 }
 
-int	Parser::get_state()
+int							Parser::get_state()
 {
 	return (this->_state);
 }
 
-void	Parser::show_vector()
+void							Parser::show_vector()
 {
 	unsigned long	i = 0;
 
@@ -79,7 +73,7 @@ void	Parser::show_vector()
 		}
 }
 
-void	Parser::show_pair()
+void							Parser::show_pair()
 {
 	unsigned long	i = 0;
 
@@ -90,7 +84,7 @@ void	Parser::show_pair()
 		}
 }
 
-int	Parser::find_match()
+int							Parser::find_match()
 {
 	if (_str.find(".chipsets") != std::string::npos)
 		return (0);
@@ -101,7 +95,7 @@ int	Parser::find_match()
 	return (-1);
 }
 
-void	Parser::clean_tab()
+void							Parser::clean_tab()
 {
 	unsigned long	i = 0;
 
@@ -118,17 +112,17 @@ void	Parser::clean_tab()
 	}
 }
 
-std::vector<std::pair<std::string, std::string>	> Parser::get_comps()
+std::vector<std::pair<std::string, std::string>	>	Parser::get_comps()
 {
 	return _comps;
 }
 
-std::vector<Link>	Parser::getLinks()
+std::vector<Link>					Parser::getLinks()
 {
 	return _my_links;
 }
 
-void			Parser::make_pair_vector()
+void							Parser::make_pair_vector()
 {
 	unsigned long		i = 0;
 
@@ -152,17 +146,39 @@ void			Parser::make_pair_vector()
 	}
 }
 
-void			Parser::find_links()
+void							Parser::check_names_in_vector()
+{
+	int	i = 0;
+	int	j = 0;
+
+	while (i < this->_comps.size())
+	{
+		j = i + 1;
+		std::cout <<  this->_comps[i].second << std::endl;
+		while (j < this->_comps.size())
+		{
+			if (this->_comps[i].second == this->_comps[j].second
+				||this->_comps[i].second.find("input") != std::string::npos
+				|| this->_comps[i].second.find("output") != std::string::npos
+				|| this->_comps[i].second.find(".chipsets") != std::string::npos
+				|| this->_comps[i].second.find(".link") != std::string::npos)
+				exit(84);
+			j = j + 1;
+		}
+		i = i + 1;
+	}
+}
+
+void							Parser::find_links()
 {
 	int		i = 0;
 
 	this->_file.close();
 	this->_file.open(this->_path.c_str());
-    if (!this->_file.is_open())
+	if (!this->_file.is_open())
 		exit(84);
-
 	while (std::getline(this->_file, this->_str) && this->_str.find(".links") == std::string::npos)
-	;
+		;
 	while (std::getline(this->_file, this->_str))
 	{
 		this->fill_map();
@@ -170,11 +186,11 @@ void			Parser::find_links()
 	}
 }
 
-void	Parser::fill_map()
+void							Parser::fill_map()
 {
 	std::string		tmp;
 	std::string		name_comp1;
-	unsigned long	pos = this->_str.find(":");
+	unsigned long		pos = this->_str.find(":");
 	std::string		name_comp = this->_str.substr(0, pos);
 	std::string		nb_pin;
 	Link			l;
@@ -190,7 +206,7 @@ void	Parser::fill_map()
 	this->_my_links.push_back(l);
 }
 
-void	Parser::check_links()
+void							Parser::check_links()
 {
 	int		i = 0;
 	int		j;
@@ -201,16 +217,14 @@ void	Parser::check_links()
 		while (j < this->_out.size())
 		{
 			if (this->_my_links[i]._comp == this->_out[j])
-			{
 				this->_my_links[i] = this->reverse_link(this->_my_links[i]);
-			}
 			j = j + 1;
 		}
 		i = i + 1;
 	}
 }
 
-Link	Parser::reverse_link(Link l)
+Link							Parser::reverse_link(Link l)
 {
 	std::string	tmp_name;
 	std::string	tmp_pin;
@@ -224,7 +238,7 @@ Link	Parser::reverse_link(Link l)
 	return (l);
 }
 
-void	Parser::show_killing_death_vector()
+void							Parser::show_killing_death_vector()
 {
 	unsigned long	i = 0;
 
@@ -235,7 +249,7 @@ void	Parser::show_killing_death_vector()
 	}
 }
 
-std::vector<std::string>	Parser::get_out()
+std::vector<std::string>				Parser::get_out()
 {
 	return _out;
 }

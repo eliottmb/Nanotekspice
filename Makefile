@@ -1,8 +1,8 @@
 ##
 ## EPITECH PROJECT, 2018
-## PSU_2017_malloc
+## nanotekspice
 ## File description:
-## Makefile
+## simulate chipsets
 ##
 
 CXX	= g++-6 -I./include/
@@ -13,14 +13,14 @@ CXXLAGS	+= -W -Wall -Wextra -Werror -std=c++17
 
 NAME		= nanotekspice
 
-SRCS		= 	  srcs/main.cpp			\
+SRCS		= 	  srcs/Main.cpp			\
 		  	  srcs/Parser.cpp		\
 		  	  srcs/ErrorManage.cpp	\
 			  srcs/Link.cpp			\
 			  srcs/Components.cpp		\
 			  srcs/AComponent.cpp		\
-			  srcs/gate.cpp			\
-			  srcs/prompt.cpp		\
+			  srcs/Gate.cpp			\
+			  srcs/Prompt.cpp		\
 			  components/srcs/Input.cpp	\
 			  components/srcs/Output.cpp	\
 			  components/srcs/4001.cpp	\

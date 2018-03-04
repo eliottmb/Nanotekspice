@@ -1,8 +1,8 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// nanotekspice
+// File description:
+// simulate chipsets
 //
 
 #ifndef __ERRORMANAGE_HPP__

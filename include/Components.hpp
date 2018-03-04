@@ -1,8 +1,8 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// nanotekspice
+// File description:
+// simulate chipsets
 //
 
 #ifndef __COMPONENTS_HPP__
@@ -14,13 +14,12 @@
 class	Components
 {
 public:
-    Components();
-    ~Components();
+	Components();
+	~Components();
 
-    void    init_component_tab();
-    int     find_in_component_tab(std::string str);
-
-    std::vector<std::string>    getComponentTab();
+	void				init_component_tab();
+	int				find_in_component_tab(std::string str);
+	std::vector<std::string>	getComponentTab();
 
 private:
     std::vector<std::string>	_my_components;

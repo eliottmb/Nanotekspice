@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// output
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #include "../include/Output.hpp"

@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// 4011
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #include "../include/4011.hpp"

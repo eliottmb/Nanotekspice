@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-//
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #ifndef	PIN_H_

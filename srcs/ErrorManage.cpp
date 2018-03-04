@@ -1,10 +1,9 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// nanotekspice
+// File description:
+// simulate chipsets
 //
-
 #include <stdlib.h>
 #include <iostream>
 #include <string>
@@ -177,16 +176,3 @@ bool		ErrorManage::back_in()
 		exit(84);
 	return (true);
 }
-
-// check file 
-//check ligne vide->delete line
-// check tab = space
-// check multispace = space
-// check there is a name 
-// check only one name
-// check si c'est bien un composant du sujet
-
-// check nombre de pin relie a chaque fois 
-// check si le nombre de pin est bon
-// check names for links
-// 

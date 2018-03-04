@@ -1,8 +1,8 @@
 //
-//EPITECH PROJECT, 2018
-//PSU_2017_malloc
-//File description:
-//Makefile
+// EPITECH PROJECT, 2018
+// nanotekspice
+// File description:
+// simulate chipsets
 //
 
 #ifndef __PARSER_HPP__
@@ -39,6 +39,7 @@ public:
 	std::vector<std::pair<std::string, std::string>	>	get_comps();
 	void							make_pair_vector();
 	void							show_pair();
+	void							check_names_in_vector();
 	void							find_links();
 	void							check_links();
 	Link							reverse_link(Link l);

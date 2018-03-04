@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// nts
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #ifndef PROMPT_T_

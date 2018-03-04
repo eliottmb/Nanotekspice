@@ -1,15 +1,15 @@
 //
 // EPITECH PROJECT, 2018
-// nts
+// nanotekspice
 // File description:
-//
+// simulate chipsets
 //
 
 #include <map>
 #include <iostream>
 #include <csignal>
 #include <memory>
-#include "../include/prompt.hpp"
+#include "../include/Prompt.hpp"
 
 int	g_sig = 0;
 int	g_isLoop = 0;
@@ -95,9 +95,9 @@ int	Prompt::dump(Parser *parse)
 
 int	Prompt::init_Pins(Parser *parse)
 {
-	int				i = 0;
-	std::string			elem;
-	nts::AComponent			*comp;
+	int							i = 0;
+	std::string						elem;
+	nts::AComponent						*comp;
 	std::vector<std::pair<std::string, std::string> >	comps;
 
 	comp = new nts::AComponent();
@@ -131,8 +131,6 @@ int	Prompt::setInput(std::string str)
 
 int	Prompt::parse_entry(std::string str, Parser *parse)
 {
-
-
 	if (!g_funcs[str]) {
 		if (str == "exit" || (str.find('=') != std::string::npos && setInput(str) == 1))
 			return 1;
