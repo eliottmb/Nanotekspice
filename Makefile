@@ -5,7 +5,7 @@
 ## simulate chipsets
 ##
 
-CXX	= g++-6 -I./include/
+CXX	= g++ -I./include/
 
 RM	= rm -f
 
